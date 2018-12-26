@@ -1,0 +1,35 @@
+{
+  "name": "German",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Hiroyuki Tanaka <h.tanaka.0325@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-redux": "^6.0.0",
+    "redux": "^4.0.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.7.18",
+    "@types/react-dom": "^16.0.11",
+    "@types/react-redux": "^6.0.11",
+    "@types/redux": "^3.6.0",
+    "awesome-typescript-loader": "^5.2.1",
+    "copy-webpack-plugin": "^4.6.0",
+    "prettier": "^1.15.3",
+    "source-map-loader": "^0.2.4",
+    "tslint": "^5.12.0",
+    "tslint-config-prettier": "^1.17.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.2.2",
+    "webpack": "^4.28.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.14"
+  }
+}
