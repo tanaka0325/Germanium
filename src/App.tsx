@@ -1,16 +1,30 @@
 import * as React from "react"
+import { connect } from "react-redux"
 
 import { Form } from "./components/Form"
 import { List } from "./components/List"
 
-export const App = () => {
-  const items = [{ id: 1, name: "aaaa" }, { id: 2, name: "bbbb" }, { id: 3, name: "cccc" }, { id: 4, name: "dddd" }]
+import { addItem } from "./actions"
 
+export const App = (props: any) => {
   return (
     <div>
       <p>App Component</p>
-      <Form />
-      <List items={items} />
+      <Form addItem={props.addItem} />
+      <List items={props.items} />
     </div>
   )
 }
+
+const mapStateToProps = state => ({
+  items: state,
+})
+
+const mapDispatchToProps = dispatch => ({
+  addItem: text => dispatch(addItem(text)),
+})
+
+export const AppContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)

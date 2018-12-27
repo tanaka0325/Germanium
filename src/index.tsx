@@ -1,6 +1,21 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom"
+import { Provider } from "react-redux"
+import { createStore } from "redux"
 
-import { App } from "./App"
+import { AppContainer } from "./App"
+import { reducer } from "./reducer"
 
-ReactDOM.render(<App />, document.getElementById("app"))
+declare var window: any
+
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
+
+ReactDOM.render(
+  <Provider store={store}>
+    <AppContainer />
+  </Provider>,
+  document.getElementById("app")
+)

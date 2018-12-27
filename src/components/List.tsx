@@ -2,7 +2,7 @@ import * as React from "react"
 
 interface Item {
   id: number
-  name: string
+  text: string
 }
 
 interface IListProps {
@@ -10,7 +10,7 @@ interface IListProps {
 }
 
 export const List = (props: IListProps) => {
-  const itemList = props.items.map(item => <li key={item.id}>{item.name}</li>)
+  const itemList = props.items.map(item => <li key={item.id}>{item.text}</li>)
 
   return (
     <div>

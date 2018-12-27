@@ -2,11 +2,14 @@ import * as React from "react"
 
 import { Textarea } from "./common/textarea"
 
+interface IFormProps {
+  addItem: any
+}
 interface IFormState {
   value: string
 }
 
-export class Form extends React.Component<{}, IFormState> {
+export class Form extends React.Component<IFormProps, IFormState> {
   constructor(props) {
     super(props)
 
@@ -25,6 +28,7 @@ export class Form extends React.Component<{}, IFormState> {
     if (e.metaKey && e.key === "Enter") {
       e.preventDefault()
       console.log("send:", this.state.value)
+      this.props.addItem(this.state.value)
       this.setState({ value: "" })
     }
   }
