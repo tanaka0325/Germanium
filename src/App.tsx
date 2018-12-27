@@ -1,3 +1,12 @@
 import * as React from "react"
 
-export const App = () => <div>App Component</div>
+import { Form } from "./components/Form"
+
+export const App = () => {
+  return (
+    <div>
+      <p>App Component</p>
+      <Form />
+    </div>
+  )
+}
