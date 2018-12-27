@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 import { Form } from "./components/Form"
 import { List } from "./components/List"
 
-import { addItem } from "./actions"
+import { addItem } from "./modules/Item"
 
 export const App = (props: any) => {
   return (

@@ -4,12 +4,12 @@ import { Provider } from "react-redux"
 import { createStore } from "redux"
 
 import { AppContainer } from "./App"
-import { reducer } from "./reducer"
+import { items } from "./modules/Item"
 
 declare var window: any
 
 const store = createStore(
-  reducer,
+  items,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
