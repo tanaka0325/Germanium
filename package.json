@@ -9,6 +9,8 @@
     "build": "webpack"
   },
   "dependencies": {
+    "nanoid": "^2.0.0",
+    "nedb": "^1.8.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",
@@ -17,6 +19,8 @@
     "rxjs": "^6.3.3"
   },
   "devDependencies": {
+    "@types/nanoid": "^1.2.0",
+    "@types/nedb": "^1.8.6",
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
     "@types/react-redux": "^6.0.11",

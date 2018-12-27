@@ -10,7 +10,7 @@ interface IListProps {
 }
 
 export const List = (props: IListProps) => {
-  const itemList = props.items.map(item => <li key={item.id}>{item.text}</li>)
+  const itemList = props.items.map(item => <li key={`item-${item.id}`}>{item.text}</li>)
 
   return (
     <div>

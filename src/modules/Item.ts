@@ -1,6 +1,9 @@
+import nanoid = require("nanoid")
 import { Reducer } from "redux"
 import { Epic, ofType } from "redux-observable"
 import { mapTo, switchMap } from "rxjs/operators"
+
+import { itemDataMapper } from "../db"
 
 // Actions
 const ADD_ITEM = "ADD_ITEM"
@@ -9,11 +12,10 @@ const FETCH_ITEMS = "FETCH_ITEMS"
 const RECEIVE_ITEMS = "RECEIVE_ITEMS"
 
 // Action Creators
-let nextId = 0
 export const addItem = (text: string) => ({
   type: ADD_ITEM as typeof ADD_ITEM,
   payload: {
-    id: nextId++,
+    id: nanoid(),
     text,
   },
 })
@@ -58,6 +60,7 @@ export const items: Reducer<State, Action> = (state = initialState, action) => {
     case REMOVE_ITEM:
       return state.filter(item => item.id !== action.payload.id)
     case RECEIVE_ITEMS:
+      console.log("receive item")
       return [...state, ...action.payload.items]
     default:
       const _: never = action
@@ -70,8 +73,14 @@ export const fetchItemsEpic: Epic = action$ =>
   action$.pipe(
     ofType(FETCH_ITEMS),
     switchMap(action => {
-      console.log(action)
-      return ["result"]
-    }),
-    mapTo(receiceItems([{ id: 999, text: "test" }, { id: 998, text: "buy" }]))
+      return itemDataMapper.findItems().then(res => receiceItems(res))
+    })
+  )
+
+export const addItemsEpic: Epic = action$ =>
+  action$.pipe(
+    ofType(ADD_ITEM),
+    switchMap(action => {
+      return itemDataMapper.addItem(action.payload).then(() => ({ type: "non" }))
+    })
   )
