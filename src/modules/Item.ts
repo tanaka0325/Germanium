@@ -12,13 +12,18 @@ const FETCH_ITEMS = "FETCH_ITEMS"
 const RECEIVE_ITEMS = "RECEIVE_ITEMS"
 
 // Action Creators
-export const addItem = (text: string) => ({
-  type: ADD_ITEM as typeof ADD_ITEM,
-  payload: {
-    id: nanoid(),
-    text,
-  },
-})
+export const addItem = (text: string) => {
+  const now = new Date()
+  return {
+    type: ADD_ITEM as typeof ADD_ITEM,
+    payload: {
+      id: nanoid(),
+      text,
+      created_at: now,
+      updasted_at: now,
+    },
+  }
+}
 
 export const removeItem = (id: number) => ({
   type: REMOVE_ITEM as typeof REMOVE_ITEM,
