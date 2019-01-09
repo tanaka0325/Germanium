@@ -123,3 +123,4 @@ typings/
 
 dist/*
 !.gitkeeps
+db.json
