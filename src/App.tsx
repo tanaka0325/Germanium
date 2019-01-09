@@ -19,8 +19,8 @@ export class App extends React.Component<any, any> {
     return (
       <div>
         <p>App Component</p>
-        <Form addItem={this.props.addItem} />
         <List items={this.props.items} />
+        <Form addItem={this.props.addItem} />
       </div>
     )
   }
