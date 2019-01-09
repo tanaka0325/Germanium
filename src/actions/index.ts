@@ -1,11 +1,11 @@
 import nanoid = require("nanoid")
 
-import { ADD_ITEM, FETCH_ITEMS, RECEIVE_ITEMS, REMOVE_ITEM } from '../constants'
+import { ADD_CHAT, FETCH_CHATS, RECEIVE_CHATS, REMOVE_CHAT } from '../constants'
 
-export const addItem = (text: string) => {
+export const addChat = (text: string) => {
   const now = new Date()
   return {
-    type: ADD_ITEM as typeof ADD_ITEM,
+    type: ADD_CHAT as typeof ADD_CHAT,
     payload: {
       id: nanoid(),
       text,
@@ -15,18 +15,18 @@ export const addItem = (text: string) => {
   }
 }
 
-export const removeItem = (id: number) => ({
-  type: REMOVE_ITEM as typeof REMOVE_ITEM,
+export const removeChat = (id: number) => ({
+  type: REMOVE_CHAT as typeof REMOVE_CHAT,
   payload: { id },
 })
 
-export const fetchItems = () => ({
-  type: FETCH_ITEMS as typeof FETCH_ITEMS,
+export const fetchChats = () => ({
+  type: FETCH_CHATS as typeof FETCH_CHATS,
 })
 
-export const receiceItems = (items: any) => ({
-  type: RECEIVE_ITEMS as typeof RECEIVE_ITEMS,
+export const receiceChats = (chats: any) => ({
+  type: RECEIVE_CHATS as typeof RECEIVE_CHATS,
   payload: {
-    items,
+    chats,
   },
 })

@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 import { Form } from "./components/Form"
 import { List } from "./components/List"
 
-import { addItem, fetchItems } from "./actions"
+import { addChat, fetchChats } from "./actions"
 
 export class App extends React.Component<any, any> {
   constructor(props) {
@@ -12,27 +12,27 @@ export class App extends React.Component<any, any> {
   }
 
   public componentDidMount() {
-    this.props.fetchItems()
+    this.props.fetchChats()
   }
 
   public render() {
     return (
       <div>
         <p>App Component</p>
-        <List items={this.props.items} />
-        <Form addItem={this.props.addItem} />
+        <List chats={this.props.chats} />
+        <Form addChat={this.props.addChat} />
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  items: state,
+  chats: state,
 })
 
 const mapDispatchToProps = dispatch => ({
-  addItem: text => dispatch(addItem(text)),
-  fetchItems: () => dispatch(fetchItems()),
+  addChat: text => dispatch(addChat(text)),
+  fetchChats: () => dispatch(fetchChats()),
 })
 
 export const AppContainer = connect(

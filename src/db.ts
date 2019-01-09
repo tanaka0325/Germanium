@@ -10,9 +10,9 @@ class DataMapper {
     })
   }
 
-  public addItem(item) {
+  public addChat(chat) {
     return new Promise((resolve, reject) => {
-      this.db.insert(item, (err, newDoc) => {
+      this.db.insert(chat, (err, newDoc) => {
         if (err) {
           reject()
           return
@@ -22,7 +22,7 @@ class DataMapper {
     })
   }
 
-  public findItems() {
+  public findChats() {
     return new Promise((resolve, reject) => {
       this.db.find({}, (err, docs) => {
         if (err) {
@@ -35,4 +35,4 @@ class DataMapper {
   }
 }
 
-export const itemDataMapper = new DataMapper("items")
+export const chatDataMapper = new DataMapper("items")

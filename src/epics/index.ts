@@ -1,4 +1,4 @@
 import { combineEpics } from "redux-observable"
-import { addItemsEpic, fetchItemsEpic } from "./item"
+import { addChatsEpic, fetchChatsEpic } from "./chat"
 
-export const rootEpics = combineEpics(fetchItemsEpic, addItemsEpic)
+export const rootEpics = combineEpics(fetchChatsEpic, addChatsEpic)

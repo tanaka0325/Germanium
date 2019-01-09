@@ -1,5 +1,5 @@
-// Item
-export const ADD_ITEM = "ADD_ITEM"
-export const REMOVE_ITEM = "REMOVE_ITEM"
-export const FETCH_ITEMS = "FETCH_ITEMS"
-export const RECEIVE_ITEMS = "RECEIVE_ITEMS"
+// Chat
+export const ADD_CHAT = "ADD_CHAT"
+export const REMOVE_CHAT = "REMOVE_CHAT"
+export const FETCH_CHATS = "FETCH_CHATS"
+export const RECEIVE_CHATS = "RECEIVE_CHATS"

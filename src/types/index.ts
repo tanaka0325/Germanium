@@ -1,4 +1,4 @@
-export interface Item {
+export interface IChat {
   id: number
   text: string
   created_at: Date
