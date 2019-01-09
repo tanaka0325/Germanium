@@ -1,8 +1,8 @@
 import { applyMiddleware, compose, createStore as reduxCreateStore } from "redux"
 import { createEpicMiddleware } from "redux-observable"
 
-import { rootReducer } from "./modules"
-import { rootEpics } from "./modules"
+import { rootEpics } from "./epics"
+import { rootReducer } from "./reducers"
 
 // For redux-devtools
 declare var window: any

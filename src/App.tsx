@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 import { Form } from "./components/Form"
 import { List } from "./components/List"
 
-import { addItem, fetchItems } from "./modules/Item"
+import { addItem, fetchItems } from "./actions"
 
 export class App extends React.Component<any, any> {
   constructor(props) {
