@@ -24,7 +24,7 @@ export const fetchChats = () => ({
   type: FETCH_CHATS as typeof FETCH_CHATS,
 })
 
-export const receiceChats = (chats: any) => ({
+export const receiveChats = (chats: any) => ({
   type: RECEIVE_CHATS as typeof RECEIVE_CHATS,
   payload: {
     chats,
