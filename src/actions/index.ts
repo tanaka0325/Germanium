@@ -1,13 +1,13 @@
-import nanoid = require("nanoid")
+import { ulid } from "ulid"
 
-import { ADD_CHAT, FETCH_CHATS, RECEIVE_CHATS, REMOVE_CHAT } from '../constants'
+import { ADD_CHAT, FETCH_CHATS, RECEIVE_CHATS, REMOVE_CHAT } from "../constants"
 
 export const addChat = (text: string) => {
   const now = new Date()
   return {
     type: ADD_CHAT as typeof ADD_CHAT,
     payload: {
-      id: nanoid(),
+      id: ulid(),
       text,
       created_at: now,
       updasted_at: now,
