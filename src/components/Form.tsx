@@ -27,7 +27,6 @@ export class Form extends React.Component<IFormProps, IFormState> {
     // Cmd+Enter => send
     if (e.metaKey && e.key === "Enter") {
       e.preventDefault()
-      console.log("send:", this.state.value)
       this.props.addChat(this.state.value)
       this.setState({ value: "" })
     }
