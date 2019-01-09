@@ -1,21 +1,20 @@
 import * as React from "react"
 
-interface Chat {
-  id: number
-  text: string
-  created_at?: Date
-}
+import { IChat } from "../types"
 
 interface IListProps {
-  chats: Chat[]
+  chats: IChat[]
 }
 
 export const List = (props: IListProps) => {
-  const chatList = props.chats.map(chat => (
-    <li key={`chat-${chat.id}`}>
-      {chat.text}({chat.created_at ? chat.created_at.toLocaleString("ja-JP") : ""})
-    </li>
-  ))
+  const chatList = props.chats.map(chat => {
+    const d = new Date(chat.created_at).toLocaleDateString("ja-JP")
+    return (
+      <li key={`chat-${chat.id}`}>
+        {chat.text}({d})
+      </li>
+    )
+  })
 
   return (
     <div>
