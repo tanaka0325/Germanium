@@ -1,7 +1,7 @@
 import * as React from "react"
 
 import { IChat } from "../types"
-import { formatYMDHm } from "../utils/date"
+import { formatYMDHms } from "../utils/date"
 
 interface IListProps {
   chats: IChat[]
@@ -12,7 +12,7 @@ export const List = (props: IListProps) => {
     const d = new Date(chat.created_at)
     return (
       <li key={`chat-${chat.id}`}>
-        {chat.text}({formatYMDHm(d)})
+        {chat.text}({formatYMDHms(d)})
       </li>
     )
   })
