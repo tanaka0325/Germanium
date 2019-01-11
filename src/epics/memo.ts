@@ -28,7 +28,7 @@ export const addMemosEpic: Epic = action$ =>
         "Content-Type": "application/json",
       }
 
-      return fetch("http://localhost:3000/memos", { method, headers, body })
+      return fetch(API_URL, { method, headers, body })
         .then(res => res.json())
         .then(res => ({ type: "none" }))
         .catch(console.error)
