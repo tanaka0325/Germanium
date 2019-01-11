@@ -9,5 +9,5 @@ interface IMemoListProps {
 
 export const MemoList = (props: IMemoListProps) => {
   const memoList = props.memos.map(m => <MemoItem key={`memo-${m.id}`} memo={m} />)
-  return <ul>{memoList}</ul>
+  return <div>{memoList}</div>
 }

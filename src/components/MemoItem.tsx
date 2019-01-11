@@ -9,9 +9,21 @@ interface IMemoProps {
 
 export const MemoItem = (props: IMemoProps) => {
   const d = new Date(props.memo.created_at)
+  const body = props.memo.text
+
+  const style = {
+    fontSize: "80%",
+  }
+
   return (
-    <li>
-      {props.memo.text}({formatYMDHms(d)})
-    </li>
+    <div className="card">
+      <div className="card-content">
+        <div className="content">
+          {body}
+          <br />
+          <span style={style}>{formatYMDHms(d)}</span>
+        </div>
+      </div>
+    </div>
   )
 }

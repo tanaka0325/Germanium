@@ -19,5 +19,12 @@ export const Textarea = (props: IProps) => {
     }
   }
 
-  return <textarea value={props.value} onChange={handleOnChange} onKeyDown={handleOnKeyDown} />
+  return (
+    <textarea
+      className="textarea"
+      value={props.value}
+      onChange={handleOnChange}
+      onKeyDown={handleOnKeyDown}
+    />
+  )
 }

@@ -10,6 +10,9 @@ interface IFormState {
 }
 
 export class MemoForm extends React.Component<IFormProps, IFormState> {
+  public style = {
+    justifyContent: "right",
+  }
   constructor(props) {
     super(props)
 
@@ -27,6 +30,12 @@ export class MemoForm extends React.Component<IFormProps, IFormState> {
     // Cmd+Enter => send
     if (e.metaKey && e.key === "Enter") {
       e.preventDefault()
+      this.addMemo()
+    }
+  }
+
+  public addMemo = () => {
+    if (this.state.value) {
       this.props.addMemo(this.state.value)
       this.setState({ value: "" })
     }
@@ -34,12 +43,19 @@ export class MemoForm extends React.Component<IFormProps, IFormState> {
 
   public render() {
     return (
-      <div>
-        <Textarea
-          value={this.state.value}
-          handleOnChange={this.handleOnChange}
-          handleOnKeyDown={this.handleOnKeyDown}
-        />
+      <div className="box">
+        <div>
+          <Textarea
+            value={this.state.value}
+            handleOnChange={this.handleOnChange}
+            handleOnKeyDown={this.handleOnKeyDown}
+          />
+        </div>
+        <div className="is-flex" style={this.style}>
+          <a className="button is-primary" onClick={this.addMemo}>
+            Post
+          </a>
+        </div>
       </div>
     )
   }
