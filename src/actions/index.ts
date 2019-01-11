@@ -1,11 +1,11 @@
 import { ulid } from "ulid"
 
-import { ADD_CHAT, FETCH_CHATS, RECEIVE_CHATS, REMOVE_CHAT } from "../constants"
+import { ADD_MEMO, FETCH_MEMOS, RECEIVE_MEMOS, REMOVE_MEMO } from "../constants"
 
-export const addChat = (text: string) => {
+export const addMemo = (text: string) => {
   const now = new Date()
   return {
-    type: ADD_CHAT as typeof ADD_CHAT,
+    type: ADD_MEMO as typeof ADD_MEMO,
     payload: {
       id: ulid(),
       text,
@@ -15,18 +15,18 @@ export const addChat = (text: string) => {
   }
 }
 
-export const removeChat = (id: number) => ({
-  type: REMOVE_CHAT as typeof REMOVE_CHAT,
+export const removeMemo = (id: number) => ({
+  type: REMOVE_MEMO as typeof REMOVE_MEMO,
   payload: { id },
 })
 
-export const fetchChats = () => ({
-  type: FETCH_CHATS as typeof FETCH_CHATS,
+export const fetchMemos = () => ({
+  type: FETCH_MEMOS as typeof FETCH_MEMOS,
 })
 
-export const receiveChats = (chats: any) => ({
-  type: RECEIVE_CHATS as typeof RECEIVE_CHATS,
+export const receiveMemos = (memos: any) => ({
+  type: RECEIVE_MEMOS as typeof RECEIVE_MEMOS,
   payload: {
-    chats,
+    memos,
   },
 })

@@ -2,14 +2,14 @@ import * as React from "react"
 import * as ReactDOM from "react-dom"
 import { Provider } from "react-redux"
 
-import { AppContainer } from "./App"
 import configureStore from "./configureStore"
+import { MemoContainer } from "./containers/MemoContainer"
 
 const store = configureStore()
 
 ReactDOM.render(
   <Provider store={store}>
-    <AppContainer />
+    <MemoContainer />
   </Provider>,
   document.getElementById("app")
 )

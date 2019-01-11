@@ -1,25 +1,25 @@
 import { Epic, ofType } from "redux-observable"
 import { switchMap } from "rxjs/operators"
 
-import { fetchChats, receiveChats } from "../actions"
-import { ADD_CHAT, FETCH_CHATS } from "../constants"
+import { fetchMemos, receiveMemos } from "../actions"
+import { ADD_MEMO, FETCH_MEMOS } from "../constants"
 
-const API_URL = "http://localhost:3000/chats"
+const API_URL = "http://localhost:3000/memos"
 
-export const fetchChatsEpic: Epic = action$ =>
+export const fetchMemosEpic: Epic = action$ =>
   action$.pipe(
-    ofType(FETCH_CHATS),
+    ofType(FETCH_MEMOS),
     switchMap(() => {
       return fetch(API_URL)
         .then(res => res.json())
-        .then(res => receiveChats(res))
+        .then(res => receiveMemos(res))
         .catch(console.error)
     })
   )
 
-export const addChatsEpic: Epic = action$ =>
+export const addMemosEpic: Epic = action$ =>
   action$.pipe(
-    ofType(ADD_CHAT),
+    ofType(ADD_MEMO),
     switchMap(action => {
       const body = JSON.stringify(action.payload)
       const method = "POST"
@@ -28,9 +28,9 @@ export const addChatsEpic: Epic = action$ =>
         "Content-Type": "application/json",
       }
 
-      return fetch("http://localhost:3000/chats", { method, headers, body })
+      return fetch("http://localhost:3000/memos", { method, headers, body })
         .then(res => res.json())
-        .then((res) => ({ type: "none" }))
+        .then(res => ({ type: "none" }))
         .catch(console.error)
     })
   )

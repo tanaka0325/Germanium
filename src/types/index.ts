@@ -1,4 +1,4 @@
-export interface IChat {
+export interface IMemo {
   id: number
   text: string
   created_at: Date

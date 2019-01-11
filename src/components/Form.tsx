@@ -3,7 +3,7 @@ import * as React from "react"
 import { Textarea } from "./common/textarea"
 
 interface IFormProps {
-  addChat: any
+  addMemo: any
 }
 interface IFormState {
   value: string
@@ -27,7 +27,7 @@ export class Form extends React.Component<IFormProps, IFormState> {
     // Cmd+Enter => send
     if (e.metaKey && e.key === "Enter") {
       e.preventDefault()
-      this.props.addChat(this.state.value)
+      this.props.addMemo(this.state.value)
       this.setState({ value: "" })
     }
   }
@@ -35,7 +35,6 @@ export class Form extends React.Component<IFormProps, IFormState> {
   public render() {
     return (
       <div>
-        <p>Form Component</p>
         <Textarea
           value={this.state.value}
           handleOnChange={this.handleOnChange}

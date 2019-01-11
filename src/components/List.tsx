@@ -1,26 +1,25 @@
 import * as React from "react"
 
-import { IChat } from "../types"
+import { IMemo } from "../types"
 import { formatYMDHms } from "../utils/date"
 
 interface IListProps {
-  chats: IChat[]
+  memos: IMemo[]
 }
 
 export const List = (props: IListProps) => {
-  const chatList = props.chats.map(chat => {
-    const d = new Date(chat.created_at)
+  const memoList = props.memos.map(memo => {
+    const d = new Date(memo.created_at)
     return (
-      <li key={`chat-${chat.id}`}>
-        {chat.text}({formatYMDHms(d)})
+      <li key={`memo-${memo.id}`}>
+        {memo.text}({formatYMDHms(d)})
       </li>
     )
   })
 
   return (
     <div>
-      <p>List Component</p>
-      <ul>{chatList}</ul>
+      <ul>{memoList}</ul>
     </div>
   )
 }
