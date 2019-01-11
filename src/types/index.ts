@@ -3,4 +3,5 @@ export interface IMemo {
   text: string
   created_at: Date
   updated_at: Date
+  sheet_id: number
 }
