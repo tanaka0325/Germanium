@@ -1,7 +1,7 @@
 import * as React from "react"
 
 import { IMemo } from "../types"
-import { formatYMDHms } from "../utils/date"
+import { formatYMDHms } from "../utils"
 
 interface IMemoProps {
   memo: IMemo
@@ -14,7 +14,11 @@ export const MemoItem = (props: IMemoProps) => {
   }
 
   const re = /\n/gi
-  const body = props.memo.text.replace(re, "<br />")
+  let body = props.memo.text.replace(re, "<br/>")
+
+  const re2 = / /gi
+  body = body.replace(re2, "&nbsp;")
+
   const createMarkup = () => ({ __html: body })
 
   return (
