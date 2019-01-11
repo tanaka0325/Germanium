@@ -9,7 +9,7 @@ interface IFormState {
   value: string
 }
 
-export class Form extends React.Component<IFormProps, IFormState> {
+export class MemoForm extends React.Component<IFormProps, IFormState> {
   constructor(props) {
     super(props)
 

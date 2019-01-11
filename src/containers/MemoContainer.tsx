@@ -1,8 +1,8 @@
 import * as React from "react"
 import { connect } from "react-redux"
 
-import { Form } from "../components/Form"
-import { List } from "../components/List"
+import { MemoForm } from "../components/MemoForm"
+import { MemoList } from "../components/MemoList"
 
 import { addMemo, fetchMemos } from "../actions"
 
@@ -18,8 +18,8 @@ export class Memo extends React.Component<any, any> {
   public render() {
     return (
       <div>
-        <Form addMemo={this.props.addMemo} />
-        <List memos={this.props.memos} />
+        <MemoForm addMemo={this.props.addMemo} />
+        <MemoList memos={this.props.memos} />
       </div>
     )
   }
