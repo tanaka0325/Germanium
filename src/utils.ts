@@ -6,6 +6,10 @@ export const formatYMDHms = (d: Date) => {
   return dayjs(d).format("YYYY/MM/DD HH:mm:ss")
 }
 
+export const formatYMD = (d: Date) => {
+  return dayjs(d).format("YYYY/MM/DD")
+}
+
 // return sort compare function
 export const sortOption = (key, order = "asc") => {
   return (a, b) => {

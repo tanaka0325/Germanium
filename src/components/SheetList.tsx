@@ -1,10 +1,12 @@
 import * as React from "react"
 
+import { addSheet } from "../actions"
 import { ISheet } from "../types"
 
 interface ISheetListProps {
   sheets: ISheet[]
-  selectSheet: (id: number) => void
+  addSheet: () => any
+  selectSheet: (id: number) => any
 }
 
 export const SheetList = (props: ISheetListProps) => {
@@ -19,5 +21,10 @@ export const SheetList = (props: ISheetListProps) => {
   }
 
   const sheetItems = props.sheets.map(sheet => sheetItem(sheet))
-  return <div>{sheetItems}</div>
+  return (
+    <div>
+      <p onClick={props.addSheet}>add sheet</p>
+      {sheetItems}
+    </div>
+  )
 }

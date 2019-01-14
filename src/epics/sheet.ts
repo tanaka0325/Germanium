@@ -30,7 +30,7 @@ export const addSheetsEpic: Epic = action$ =>
 
       return fetch(API_URL, { method, headers, body })
         .then(res => res.json())
-        .then(res => ({ type: "none" }))
+        .then(res => fetchMemos(res.id))
         .catch(console.error)
     })
   )

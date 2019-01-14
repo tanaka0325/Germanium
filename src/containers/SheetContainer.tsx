@@ -16,7 +16,11 @@ export class Sheet extends React.Component<any, any> {
   public render() {
     return (
       <div className="sheet">
-        <SheetList sheets={this.props.sheets} selectSheet={this.props.selectSheet} />
+        <SheetList
+          sheets={this.props.sheets}
+          addSheet={this.props.addSheet}
+          selectSheet={this.props.selectSheet}
+        />
       </div>
     )
   }

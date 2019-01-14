@@ -1,6 +1,7 @@
 import { ulid } from "ulid"
 
 import { ADD_SHEET, FETCH_SHEETS, RECEIVE_SHEETS, SELECT_SHEET } from "../constants"
+import { formatYMD } from "../utils"
 
 export const addSheet = (title: string) => {
   const now = new Date()
@@ -8,7 +9,7 @@ export const addSheet = (title: string) => {
     type: ADD_SHEET as typeof ADD_SHEET,
     payload: {
       id: ulid(),
-      title,
+      title: formatYMD(now),
       created_at: now,
       updasted_at: now,
     },

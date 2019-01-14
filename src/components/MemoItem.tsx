@@ -25,7 +25,6 @@ export const MemoItem = (props: IMemoProps) => {
     <div className="card">
       <div className="card-content">
         <div className="content">
-          {props.memo.sheet_id}:
           <span dangerouslySetInnerHTML={createMarkup()} />
           <br />
           <span style={style}>{formatYMDHms(d)}</span>
