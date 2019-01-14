@@ -3,3 +3,9 @@ export const ADD_MEMO = "ADD_MEMO"
 export const REMOVE_MEMO = "REMOVE_MEMO"
 export const FETCH_MEMOS = "FETCH_MEMOS"
 export const RECEIVE_MEMOS = "RECEIVE_MEMOS"
+
+// Sheet
+export const ADD_SHEET = "ADD_SHEET"
+export const REMOVE_SHEET = "REMOVE_SHEET"
+export const FETCH_SHEETS = "FETCH_SHEETS"
+export const RECEIVE_SHEETS = "RECEIVE_SHEETS"

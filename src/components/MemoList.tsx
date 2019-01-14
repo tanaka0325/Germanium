@@ -11,5 +11,5 @@ interface IMemoListProps {
 export const MemoList = (props: IMemoListProps) => {
   const memos = props.memos.sort(sortOption("id", "desc"))
   const memoList = memos.map(m => <MemoItem key={`memo-${m.id}`} memo={m} />)
-  return <div>{memoList}</div>
+  return <div className="memolist">{memoList}</div>
 }

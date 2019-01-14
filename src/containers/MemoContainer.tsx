@@ -17,7 +17,7 @@ export class Memo extends React.Component<any, any> {
 
   public render() {
     return (
-      <div>
+      <div className="memo">
         <MemoForm addMemo={this.props.addMemo} />
         <MemoList memos={this.props.memos} />
       </div>
@@ -26,7 +26,7 @@ export class Memo extends React.Component<any, any> {
 }
 
 const mapStateToProps = state => ({
-  memos: state,
+  memos: state.memos,
 })
 
 const mapDispatchToProps = dispatch => ({
