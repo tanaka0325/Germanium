@@ -9,8 +9,12 @@ const API_URL = "http://localhost:3000/memos"
 export const fetchMemosEpic: Epic = action$ =>
   action$.pipe(
     ofType(FETCH_MEMOS),
-    switchMap(() => {
-      return fetch(API_URL)
+    switchMap(action => {
+      const url =
+        action.payload && action.payload.sheetId
+          ? `${API_URL}?sheet_id=${action.payload.sheetId}`
+          : API_URL
+      return fetch(url)
         .then(res => res.json())
         .then(res => receiveMemos(res))
         .catch(console.error)

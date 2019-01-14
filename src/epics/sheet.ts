@@ -1,8 +1,8 @@
 import { Epic, ofType } from "redux-observable"
-import { switchMap } from "rxjs/operators"
+import { map, switchMap } from "rxjs/operators"
 
-import { fetchSheets, receiveSheets } from "../actions"
-import { ADD_SHEET, FETCH_SHEETS } from "../constants"
+import { fetchMemos, receiveSheets } from "../actions"
+import { ADD_SHEET, FETCH_SHEETS, SELECT_SHEET } from "../constants"
 
 const API_URL = "http://localhost:3000/sheets"
 
@@ -33,4 +33,10 @@ export const addSheetsEpic: Epic = action$ =>
         .then(res => ({ type: "none" }))
         .catch(console.error)
     })
+  )
+
+export const selectSheetEpic: Epic = action$ =>
+  action$.pipe(
+    ofType(SELECT_SHEET),
+    map(action => fetchMemos(action.payload.id))
   )

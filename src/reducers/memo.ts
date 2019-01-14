@@ -16,7 +16,8 @@ export const memos: Reducer<IMemo[], Action> = (state = [], action) => {
     case REMOVE_MEMO:
       return state.filter(memo => memo.id !== action.payload.id)
     case RECEIVE_MEMOS:
-      return [...state, ...action.payload.memos]
+      // return [...state, ...action.payload.memos]
+      return [...action.payload.memos]
     default:
       const _: never = action
       return state

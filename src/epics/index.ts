@@ -1,6 +1,12 @@
 import { combineEpics } from "redux-observable"
 
 import { addMemosEpic, fetchMemosEpic } from "./memo"
-import { addSheetsEpic, fetchSheetsEpic } from "./sheet"
+import { addSheetsEpic, fetchSheetsEpic, selectSheetEpic } from "./sheet"
 
-export const rootEpics = combineEpics(fetchMemosEpic, addMemosEpic, addSheetsEpic, fetchSheetsEpic)
+export const rootEpics = combineEpics(
+  fetchMemosEpic,
+  addMemosEpic,
+  addSheetsEpic,
+  fetchSheetsEpic,
+  selectSheetEpic
+)

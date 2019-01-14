@@ -1,7 +1,7 @@
 import * as React from "react"
 import { connect } from "react-redux"
 
-import { addSheet, fetchSheets } from "../actions"
+import { addSheet, fetchSheets, selectSheet } from "../actions"
 import { SheetList } from "../components/SheetList"
 
 export class Sheet extends React.Component<any, any> {
@@ -16,7 +16,7 @@ export class Sheet extends React.Component<any, any> {
   public render() {
     return (
       <div className="sheet">
-        <SheetList sheets={this.props.sheets} />
+        <SheetList sheets={this.props.sheets} selectSheet={this.props.selectSheet} />
       </div>
     )
   }
@@ -29,6 +29,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   addSheet: text => dispatch(addSheet(text)),
   fetchSheets: () => dispatch(fetchSheets()),
+  selectSheet: id => dispatch(selectSheet(id)),
 })
 
 export const SheetContainer = connect(

@@ -4,5 +4,9 @@
 }
 
 .app > .sheet {
-  background-color: lightcyan
+  margin: 10px;
+}
+
+.app > .memo {
+  margin: 20px;
 }

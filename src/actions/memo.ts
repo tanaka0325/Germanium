@@ -11,7 +11,7 @@ export const addMemo = (text: string) => {
       text,
       created_at: now,
       updasted_at: now,
-      sheet_id: 3,
+      sheet_id: 4,
     },
   }
 }
@@ -21,9 +21,10 @@ export const removeMemo = (id: number) => ({
   payload: { id },
 })
 
-export const fetchMemos = () => ({
-  type: FETCH_MEMOS as typeof FETCH_MEMOS,
-})
+export const fetchMemos = (sheetId?: number) => {
+  const action = { type: FETCH_MEMOS as typeof FETCH_MEMOS }
+  return sheetId ? Object.assign({}, action, { payload: { sheetId } }) : action
+}
 
 export const receiveMemos = (memos: any) => ({
   type: RECEIVE_MEMOS as typeof RECEIVE_MEMOS,
