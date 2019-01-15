@@ -11,7 +11,7 @@ export const addMemo = (text: string) => {
       text,
       created_at: now,
       updasted_at: now,
-      sheet_id: 4,
+      sheet_id: "01D1628KV1G09XSW7HGQRN2ADZ",
     },
   }
 }
