@@ -31,7 +31,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  addSheet: text => dispatch(addSheet(text)),
+  addSheet: () => dispatch(addSheet()),
   fetchSheets: () => dispatch(fetchSheets()),
   selectSheet: id => dispatch(selectSheet(id)),
 })

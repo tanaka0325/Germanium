@@ -1,10 +1,11 @@
 import { Epic, ofType } from "redux-observable"
-import { map, switchMap } from "rxjs/operators"
+import { ajax } from "rxjs/ajax"
+import { mergeMap, switchMap } from "rxjs/operators"
 
-import { fetchMemos, receiveSheets } from "../actions"
+import { receiveMemos, receiveSheet, receiveSheets } from "../actions"
 import { ADD_SHEET, FETCH_SHEETS, SELECT_SHEET } from "../constants"
 
-const API_URL = "http://localhost:3000/sheets"
+const API_URL = "http://localhost:8888/sheets"
 
 export const fetchSheetsEpic: Epic = action$ =>
   action$.pipe(
@@ -21,22 +22,24 @@ export const addSheetsEpic: Epic = action$ =>
   action$.pipe(
     ofType(ADD_SHEET),
     switchMap(action => {
-      const body = JSON.stringify(action.payload)
       const method = "POST"
       const headers = {
         Accept: "application/json",
         "Content-Type": "application/json",
       }
-
-      return fetch(API_URL, { method, headers, body })
-        .then(res => res.json())
-        .then(res => fetchMemos(res.id))
-        .catch(console.error)
+      return ajax
+        .post(API_URL, "", headers)
+        .pipe(mergeMap(res => [receiveSheet(res.response), receiveMemos([])]))
     })
   )
 
 export const selectSheetEpic: Epic = action$ =>
   action$.pipe(
     ofType(SELECT_SHEET),
-    map(action => fetchMemos(action.payload.id))
+    switchMap(action => {
+      return fetch(`${API_URL}/${action.payload.id}`)
+        .then(res => res.json())
+        .then(res => receiveMemos(res.memos))
+        .catch(console.error)
+    })
   )

@@ -4,7 +4,7 @@ import { switchMap } from "rxjs/operators"
 import { fetchMemos, receiveMemos } from "../actions"
 import { ADD_MEMO, FETCH_MEMOS } from "../constants"
 
-const API_URL = "http://localhost:3000/memos"
+const API_URL = "http://localhost:8888/memos"
 
 export const fetchMemosEpic: Epic = action$ =>
   action$.pipe(

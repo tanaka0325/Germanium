@@ -1,20 +1,8 @@
-import { ulid } from "ulid"
+import { ADD_SHEET, FETCH_SHEETS, RECEIVE_SHEET, RECEIVE_SHEETS, SELECT_SHEET } from "../constants"
 
-import { ADD_SHEET, FETCH_SHEETS, RECEIVE_SHEETS, SELECT_SHEET } from "../constants"
-import { formatYMD } from "../utils"
-
-export const addSheet = (title: string) => {
-  const now = new Date()
-  return {
-    type: ADD_SHEET as typeof ADD_SHEET,
-    payload: {
-      id: ulid(),
-      title: formatYMD(now),
-      created_at: now,
-      updasted_at: now,
-    },
-  }
-}
+export const addSheet = () => ({
+  type: ADD_SHEET as typeof ADD_SHEET,
+})
 
 export const fetchSheets = () => ({
   type: FETCH_SHEETS as typeof FETCH_SHEETS,
@@ -24,6 +12,13 @@ export const receiveSheets = (sheets: any) => ({
   type: RECEIVE_SHEETS as typeof RECEIVE_SHEETS,
   payload: {
     sheets,
+  },
+})
+
+export const receiveSheet = (sheet: any) => ({
+  type: RECEIVE_SHEET as typeof RECEIVE_SHEET,
+  payload: {
+    sheet,
   },
 })
 

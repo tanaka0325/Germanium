@@ -21,7 +21,7 @@ export const removeMemo = (id: number) => ({
   payload: { id },
 })
 
-export const fetchMemos = (sheetId?: number) => {
+export const fetchMemos = (sheetId?: string) => {
   const action = { type: FETCH_MEMOS as typeof FETCH_MEMOS }
   return sheetId ? Object.assign({}, action, { payload: { sheetId } }) : action
 }
