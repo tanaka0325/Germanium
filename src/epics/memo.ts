@@ -3,7 +3,7 @@ import { catchError, map, switchMap } from "rxjs/operators"
 
 import { of } from "rxjs"
 import { ajax } from "rxjs/ajax"
-import { addedMemo, fetchMemos, receiveMemos } from "../actions"
+import { addedMemo, receiveMemos } from "../actions"
 import { ADD_MEMO, FETCH_MEMOS } from "../constants"
 
 const API_URL = "http://localhost:8888/memos"

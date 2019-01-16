@@ -1,12 +1,11 @@
 import { combineEpics } from "redux-observable"
 
-import { addMemosEpic, fetchMemosEpic } from "./memo"
-import { addSheetsEpic, fetchSheetsEpic, selectSheetEpic } from "./sheet"
+import * as MemoEpics from "./memo"
+import * as SheetEpics from "./sheet"
 
-export const rootEpics = combineEpics(
-  fetchMemosEpic,
-  addMemosEpic,
-  addSheetsEpic,
-  fetchSheetsEpic,
-  selectSheetEpic
-)
+const epicsObj = Object.assign({}, MemoEpics, SheetEpics)
+
+let epics = []
+epics = Object.values(epicsObj).map(epic => epic)
+
+export const rootEpics = combineEpics(...epics)

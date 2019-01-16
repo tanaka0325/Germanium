@@ -1,5 +1,3 @@
-import { ulid } from "ulid"
-
 import { ADD_MEMO, ADDED_MEMO, FETCH_MEMOS, RECEIVE_MEMOS, REMOVE_MEMO } from "../constants"
 import { IMemo } from "../types"
 
