@@ -5,15 +5,11 @@
   "author": "Hiroyuki Tanaka <h.tanaka.0325@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "npm-run-all -p api_server serve",
-    "serve": "webpack-dev-server",
-    "api_server": "json-server --watch db.json",
+    "start": "webpack-dev-server",
     "build": "webpack"
   },
   "dependencies": {
     "dayjs": "^1.7.8",
-    "nanoid": "^2.0.0",
-    "nedb": "^1.8.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",
@@ -23,16 +19,12 @@
     "ulid": "^2.3.0"
   },
   "devDependencies": {
-    "@types/nanoid": "^1.2.0",
-    "@types/nedb": "^1.8.6",
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
     "@types/react-redux": "^6.0.11",
     "@types/redux": "^3.6.0",
     "awesome-typescript-loader": "^5.2.1",
     "copy-webpack-plugin": "^4.6.0",
-    "json-server": "^0.14.2",
-    "npm-run-all": "^4.1.5",
     "prettier": "^1.15.3",
     "source-map-loader": "^0.2.4",
     "tslint": "^5.12.0",
