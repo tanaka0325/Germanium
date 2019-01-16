@@ -1,24 +1,21 @@
 import { Epic, ofType } from "redux-observable"
-import { switchMap } from "rxjs/operators"
+import { catchError, map, switchMap } from "rxjs/operators"
 
-import { fetchMemos, receiveMemos } from "../actions"
+import { of } from "rxjs"
+import { ajax } from "rxjs/ajax"
+import { addedMemo, fetchMemos, receiveMemos } from "../actions"
 import { ADD_MEMO, FETCH_MEMOS } from "../constants"
 
 const API_URL = "http://localhost:8888/memos"
+const headers = {
+  Accept: "application/json",
+  "Content-Type": "application/json",
+}
 
 export const fetchMemosEpic: Epic = action$ =>
   action$.pipe(
     ofType(FETCH_MEMOS),
-    switchMap(action => {
-      const url =
-        action.payload && action.payload.sheetId
-          ? `${API_URL}?sheet_id=${action.payload.sheetId}`
-          : API_URL
-      return fetch(url)
-        .then(res => res.json())
-        .then(res => receiveMemos(res))
-        .catch(console.error)
-    })
+    switchMap(() => ajax.getJSON(API_URL).pipe(map(res => receiveMemos(res))))
   )
 
 export const addMemosEpic: Epic = action$ =>
@@ -27,14 +24,17 @@ export const addMemosEpic: Epic = action$ =>
     switchMap(action => {
       const body = JSON.stringify(action.payload)
       const method = "POST"
-      const headers = {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      }
 
-      return fetch(API_URL, { method, headers, body })
-        .then(res => res.json())
-        .then(res => ({ type: "none" }))
-        .catch(console.error)
+      return ajax.post(API_URL, body, headers).pipe(
+        map((res: any) => addedMemo(res.response)),
+        catchError(err => {
+          console.log(err)
+          return of({
+            type: "error",
+            payload: err,
+            error: true,
+          })
+        })
+      )
     })
   )

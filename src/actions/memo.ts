@@ -1,20 +1,22 @@
 import { ulid } from "ulid"
 
-import { ADD_MEMO, FETCH_MEMOS, RECEIVE_MEMOS, REMOVE_MEMO } from "../constants"
+import { ADD_MEMO, ADDED_MEMO, FETCH_MEMOS, RECEIVE_MEMOS, REMOVE_MEMO } from "../constants"
+import { IMemo } from "../types"
 
 export const addMemo = (text: string) => {
-  const now = new Date()
   return {
     type: ADD_MEMO as typeof ADD_MEMO,
     payload: {
-      id: ulid(),
       text,
-      created_at: now,
-      updasted_at: now,
-      sheet_id: "01D1628KV1G09XSW7HGQRN2ADZ",
+      sheet_id: "01D1A9FQPWNHTQ1AZMKREH3W5A",
     },
   }
 }
+
+export const addedMemo = (memo: IMemo) => ({
+  type: ADDED_MEMO as typeof ADDED_MEMO,
+  payload: { memo },
+})
 
 export const removeMemo = (id: number) => ({
   type: REMOVE_MEMO as typeof REMOVE_MEMO,
