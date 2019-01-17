@@ -1,4 +1,7 @@
 import * as React from "react"
+import * as remark from "remark"
+import * as breaks from "remark-breaks"
+import * as remark2react from "remark-react"
 
 import { IMemo } from "../types"
 import { formatYMDHms } from "../utils"
@@ -10,28 +13,21 @@ interface IMemoProps {
 
 export const MemoItem = (props: IMemoProps) => {
   const d = new Date(props.memo.created_at)
-  const style = {
-    fontSize: "80%",
-  }
-
-  const re = /\n/gi
-  let body = props.memo.text.replace(re, "<br/>")
-
-  const re2 = / /gi
-  body = body.replace(re2, "&nbsp;")
-
-  const createMarkup = () => ({ __html: body })
 
   const removeMemo = () => {
     props.removeMemo(props.memo.id)
   }
 
+  const text = remark()
+    .use(breaks)
+    .use(remark2react)
+    .processSync(props.memo.text).contents
+
   return (
     <div className="card">
       <div className="card-content">
         <div className="content">
-          <span dangerouslySetInnerHTML={createMarkup()} />
-          <br />
+          {text}
           <span style={style}>{formatYMDHms(d)}</span>
           <span onClick={removeMemo}>
             <i className="icon ion-md-trash" />
@@ -40,4 +36,8 @@ export const MemoItem = (props: IMemoProps) => {
       </div>
     </div>
   )
+}
+
+const style = {
+  fontSize: "80%",
 }
