@@ -1,5 +1,5 @@
 export interface IMemo {
-  id: number
+  id: string
   text: string
   created_at: Date
   updated_at: Date
@@ -7,8 +7,7 @@ export interface IMemo {
 }
 
 export interface ISheet {
-  id: number
-  title: string
+  id: string
   created_at: Date
   updated_at: Date
 }

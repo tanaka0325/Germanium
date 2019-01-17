@@ -4,7 +4,7 @@ import { catchError, map, switchMap } from "rxjs/operators"
 import { of } from "rxjs"
 import { ajax } from "rxjs/ajax"
 import { addedMemo, receiveMemos } from "../actions"
-import { ADD_MEMO, FETCH_MEMOS } from "../constants"
+import { ADD_MEMO, FETCH_MEMOS, REMOVE_MEMO } from "../constants"
 
 const API_URL = "http://localhost:8888/memos"
 const headers = {
@@ -36,5 +36,13 @@ export const addMemosEpic: Epic = action$ =>
           })
         })
       )
+    })
+  )
+
+export const removeMemoEpic: Epic = action$ =>
+  action$.pipe(
+    ofType(REMOVE_MEMO),
+    switchMap(action => {
+      return ajax.delete(`${API_URL}/${action.payload.id}`).pipe(map(res => ({ type: "none" })))
     })
   )

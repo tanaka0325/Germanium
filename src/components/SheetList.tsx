@@ -8,7 +8,7 @@ import { formatYMD } from "../utils"
 interface ISheetListProps {
   sheets: ISheet[]
   addSheet: () => any
-  selectSheet: (id: number) => any
+  selectSheet: (id: string) => any
 }
 
 export const SheetList = (props: ISheetListProps) => {

@@ -5,6 +5,7 @@ import { formatYMDHms } from "../utils"
 
 interface IMemoProps {
   memo: IMemo
+  removeMemo: any
 }
 
 export const MemoItem = (props: IMemoProps) => {
@@ -21,6 +22,10 @@ export const MemoItem = (props: IMemoProps) => {
 
   const createMarkup = () => ({ __html: body })
 
+  const removeMemo = () => {
+    props.removeMemo(props.memo.id)
+  }
+
   return (
     <div className="card">
       <div className="card-content">
@@ -28,6 +33,9 @@ export const MemoItem = (props: IMemoProps) => {
           <span dangerouslySetInnerHTML={createMarkup()} />
           <br />
           <span style={style}>{formatYMDHms(d)}</span>
+          <span onClick={removeMemo}>
+            <i className="icon ion-md-trash" />
+          </span>
         </div>
       </div>
     </div>

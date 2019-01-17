@@ -1,7 +1,7 @@
 import * as React from "react"
 import { connect } from "react-redux"
 
-import { addMemo, addSheet, fetchSheet, fetchSheets, selectSheet } from "../actions"
+import { addMemo, addSheet, fetchSheet, fetchSheets, removeMemo, selectSheet } from "../actions"
 import { MemoForm } from "../components/MemoForm"
 import { MemoList } from "../components/MemoList"
 import { SheetList } from "../components/SheetList"
@@ -33,7 +33,7 @@ export class Sheet extends React.Component<any, any> {
             selectedSheetId={this.props.selectedSheetId}
             disabled={formDisabled}
           />
-          <MemoList memos={this.props.memos} />
+          <MemoList memos={this.props.memos} removeMemo={this.props.removeMemo} />
         </div>
       </>
     )
@@ -48,6 +48,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addMemo: (sheetId, text) => dispatch(addMemo(sheetId, text)),
+  removeMemo: memoId => dispatch(removeMemo(memoId)),
   addSheet: () => dispatch(addSheet()),
   fetchSheet: id => dispatch(fetchSheet(id)),
   fetchSheets: () => dispatch(fetchSheets()),

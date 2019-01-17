@@ -16,7 +16,7 @@ export const addedMemo = (memo: IMemo) => ({
   payload: { memo },
 })
 
-export const removeMemo = (id: number) => ({
+export const removeMemo = (id: string) => ({
   type: REMOVE_MEMO as typeof REMOVE_MEMO,
   payload: { id },
 })
