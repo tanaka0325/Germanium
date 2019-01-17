@@ -1,7 +1,21 @@
-import { ADD_SHEET, FETCH_SHEETS, RECEIVE_SHEET, RECEIVE_SHEETS, SELECT_SHEET } from "../constants"
+import {
+  ADD_SHEET,
+  FETCH_SHEET,
+  FETCH_SHEETS,
+  RECEIVE_SHEET,
+  RECEIVE_SHEETS,
+  SELECT_SHEET,
+} from "../constants"
 
 export const addSheet = () => ({
   type: ADD_SHEET as typeof ADD_SHEET,
+})
+
+export const fetchSheet = (id: string) => ({
+  type: FETCH_SHEET as typeof FETCH_SHEET,
+  payload: {
+    id,
+  },
 })
 
 export const fetchSheets = () => ({

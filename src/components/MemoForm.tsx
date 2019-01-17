@@ -4,6 +4,8 @@ import { Textarea } from "./common/textarea"
 
 interface IFormProps {
   addMemo: any
+  selectedSheetId: string
+  disabled: boolean
 }
 interface IFormState {
   value: string
@@ -36,12 +38,19 @@ export class MemoForm extends React.Component<IFormProps, IFormState> {
 
   public addMemo = () => {
     if (this.state.value) {
-      this.props.addMemo(this.state.value)
+      this.props.addMemo(this.props.selectedSheetId, this.state.value)
       this.setState({ value: "" })
     }
   }
 
   public render() {
+    const button = !this.props.disabled ? (
+      <a className="button is-primary" onClick={this.addMemo}>
+        Post
+      </a>
+    ) : (
+      <span className="button is-static">Post</span>
+    )
     return (
       <div className="box">
         <div>
@@ -49,12 +58,11 @@ export class MemoForm extends React.Component<IFormProps, IFormState> {
             value={this.state.value}
             handleOnChange={this.handleOnChange}
             handleOnKeyDown={this.handleOnKeyDown}
+            disabled={this.props.disabled}
           />
         </div>
         <div className="is-flex" style={this.style}>
-          <a className="button is-primary" onClick={this.addMemo}>
-            Post
-          </a>
+          {button}
         </div>
       </div>
     )

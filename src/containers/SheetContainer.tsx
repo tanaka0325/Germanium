@@ -1,7 +1,9 @@
 import * as React from "react"
 import { connect } from "react-redux"
 
-import { addSheet, fetchSheets, selectSheet } from "../actions"
+import { addMemo, addSheet, fetchSheet, fetchSheets, selectSheet } from "../actions"
+import { MemoForm } from "../components/MemoForm"
+import { MemoList } from "../components/MemoList"
 import { SheetList } from "../components/SheetList"
 
 export class Sheet extends React.Component<any, any> {
@@ -14,24 +16,40 @@ export class Sheet extends React.Component<any, any> {
   }
 
   public render() {
+    const latestSheet = this.props.sheets[this.props.sheets.length - 1]
+    const formDisabled = !(latestSheet && latestSheet.id === this.props.selectedSheetId)
     return (
-      <div className="sheet">
-        <SheetList
-          sheets={this.props.sheets}
-          addSheet={this.props.addSheet}
-          selectSheet={this.props.selectSheet}
-        />
-      </div>
+      <>
+        <div className="sheet">
+          <SheetList
+            sheets={this.props.sheets}
+            addSheet={this.props.addSheet}
+            selectSheet={this.props.selectSheet}
+          />
+        </div>
+        <div className="memo">
+          <MemoForm
+            addMemo={this.props.addMemo}
+            selectedSheetId={this.props.selectedSheetId}
+            disabled={formDisabled}
+          />
+          <MemoList memos={this.props.memos} />
+        </div>
+      </>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  sheets: state.sheets,
+  selectedSheetId: state.sheet.selectedId,
+  sheets: state.sheet.list,
+  memos: state.memos,
 })
 
 const mapDispatchToProps = dispatch => ({
+  addMemo: (sheetId, text) => dispatch(addMemo(sheetId, text)),
   addSheet: () => dispatch(addSheet()),
+  fetchSheet: id => dispatch(fetchSheet(id)),
   fetchSheets: () => dispatch(fetchSheets()),
   selectSheet: id => dispatch(selectSheet(id)),
 })

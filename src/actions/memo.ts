@@ -1,12 +1,12 @@
 import { ADD_MEMO, ADDED_MEMO, FETCH_MEMOS, RECEIVE_MEMOS, REMOVE_MEMO } from "../constants"
 import { IMemo } from "../types"
 
-export const addMemo = (text: string) => {
+export const addMemo = (sheetId: string, text: string) => {
   return {
     type: ADD_MEMO as typeof ADD_MEMO,
     payload: {
       text,
-      sheet_id: "01D1A9FQPWNHTQ1AZMKREH3W5A",
+      sheet_id: sheetId,
     },
   }
 }

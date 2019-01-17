@@ -1,6 +1,6 @@
 import { combineReducers } from "redux"
 
 import { memos } from "./memo"
-import { sheets } from "./sheet"
+import { sheet } from "./sheet"
 
-export const rootReducer = combineReducers({ memos, sheets })
+export const rootReducer = combineReducers({ memos, sheet })

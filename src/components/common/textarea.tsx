@@ -4,6 +4,7 @@ interface IProps {
   value: string
   handleOnChange?: any
   handleOnKeyDown?: any
+  disabled: boolean
 }
 
 export const Textarea = (props: IProps) => {
@@ -25,6 +26,7 @@ export const Textarea = (props: IProps) => {
       value={props.value}
       onChange={handleOnChange}
       onKeyDown={handleOnKeyDown}
+      disabled={props.disabled}
     />
   )
 }
