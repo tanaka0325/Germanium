@@ -1,6 +1,7 @@
 import * as React from "react"
 
-import { Textarea } from "./common/textarea"
+import { Button } from "./common/Button"
+import { Textarea } from "./common/Textarea"
 
 interface IFormProps {
   addMemo: any
@@ -62,7 +63,9 @@ export class MemoForm extends React.Component<IFormProps, IFormState> {
           />
         </div>
         <div className="is-flex" style={this.style}>
-          {button}
+          <Button handleOnClick={this.addMemo} disabled={this.props.disabled}>
+            <i className="icon ion-md-send" />
+          </Button>
         </div>
       </div>
     )

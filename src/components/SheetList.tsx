@@ -1,6 +1,7 @@
 import * as React from "react"
 
 import { addSheet } from "../actions"
+import { Button } from "../components/common/Button"
 import { ISheet } from "../types"
 import { formatYMD } from "../utils"
 
@@ -20,12 +21,17 @@ export const SheetList = (props: ISheetListProps) => {
       </p>
     )
   }
-
   const sheetItems = props.sheets.map(sheet => sheetItem(sheet))
   return (
     <div>
-      <p onClick={props.addSheet}>add sheet</p>
+      <Button classNames={["is-fullwidth"]} handleOnClick={props.addSheet}>
+        <i className="icon ion-md-add" style={style} />
+      </Button>
       {sheetItems}
     </div>
   )
+}
+
+const style = {
+  fontSize: "1.5rem",
 }
