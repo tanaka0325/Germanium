@@ -33,6 +33,7 @@ export class Sheet extends React.Component<any, {}> {
             sheets={this.props.sheets}
             addSheet={this.props.addSheet}
             selectSheet={this.props.selectSheet}
+            selectedSheetId={this.props.selectedSheetId}
           />
         </div>
         <div className="memo">

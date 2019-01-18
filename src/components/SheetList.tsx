@@ -8,14 +8,17 @@ interface ISheetListProps {
   sheets: ISheet[]
   addSheet: () => any
   selectSheet: (id: string) => any
+  selectedSheetId: string
 }
 
 export const SheetList = (props: ISheetListProps) => {
   const sheetItem = (sheet: ISheet) => {
     const handleOnClick = () => props.selectSheet(sheet.id)
     const d = formatYMD(new Date(sheet.created_at))
+    const className =
+      props.selectedSheetId === sheet.id ? "has-background-grey-lighter" : ""
     return (
-      <p key={sheet.id} onClick={handleOnClick}>
+      <p key={sheet.id} className={className} onClick={handleOnClick}>
         {d}
       </p>
     )
