@@ -8,6 +8,7 @@ import {
   fetchSheets,
   removeMemo,
   selectSheet,
+  toggleFavorite,
 } from "../actions"
 import { MemoForm } from "../components/MemoForm"
 import { MemoList } from "../components/MemoList"
@@ -40,7 +41,11 @@ export class Sheet extends React.Component<any, {}> {
             selectedSheetId={this.props.selectedSheetId}
             disabled={formDisabled}
           />
-          <MemoList memos={this.props.memos} removeMemo={this.props.removeMemo} />
+          <MemoList
+            memos={this.props.memos}
+            removeMemo={this.props.removeMemo}
+            toggleFavorite={this.props.toggleFavorite}
+          />
         </div>
       </>
     )
@@ -60,6 +65,7 @@ const mapDispatchToProps = dispatch => ({
   fetchSheet: id => dispatch(fetchSheet(id)),
   fetchSheets: () => dispatch(fetchSheets()),
   selectSheet: id => dispatch(selectSheet(id)),
+  toggleFavorite: (id, favorite) => dispatch(toggleFavorite(id, favorite)),
 })
 
 export const SheetContainer = connect(

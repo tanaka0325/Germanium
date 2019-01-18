@@ -2,8 +2,10 @@ import {
   ADD_MEMO,
   ADDED_MEMO,
   FETCH_MEMOS,
+  RECEIVE_MEMO,
   RECEIVE_MEMOS,
   REMOVE_MEMO,
+  TOGGLE_FAVORITE,
 } from "../constants"
 import { IMemo } from "../types"
 
@@ -30,9 +32,22 @@ export const fetchMemos = (sheetId?: string) => {
   return sheetId ? Object.assign({}, action, { payload: { sheetId } }) : action
 }
 
+export const receiveMemo = (memo: IMemo) => ({
+  type: RECEIVE_MEMO as typeof RECEIVE_MEMO,
+  payload: { memo },
+})
+
 export const receiveMemos = (memos: IMemo[]) => ({
   type: RECEIVE_MEMOS as typeof RECEIVE_MEMOS,
   payload: {
     memos,
+  },
+})
+
+export const toggleFavorite = (id: string, favorite: boolean) => ({
+  type: TOGGLE_FAVORITE as typeof TOGGLE_FAVORITE,
+  payload: {
+    id,
+    favorite,
   },
 })

@@ -3,7 +3,9 @@ export const ADD_MEMO = "ADD_MEMO"
 export const ADDED_MEMO = "ADDED_MEMO"
 export const REMOVE_MEMO = "REMOVE_MEMO"
 export const FETCH_MEMOS = "FETCH_MEMOS"
+export const RECEIVE_MEMO = "RECEIVE_MEMO"
 export const RECEIVE_MEMOS = "RECEIVE_MEMOS"
+export const TOGGLE_FAVORITE = "TOGGLE_FAVORITE"
 
 // Sheet
 export const ADD_SHEET = "ADD_SHEET"

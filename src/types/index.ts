@@ -4,6 +4,7 @@ export interface IMemo {
   created_at: Date
   updated_at: Date
   sheet_id: number
+  favorite: boolean
 }
 
 export interface ISheet {

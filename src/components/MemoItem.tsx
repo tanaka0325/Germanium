@@ -9,6 +9,7 @@ import { formatYMDHms } from "../utils"
 interface IMemoProps {
   memo: IMemo
   removeMemo: any
+  toggleFavorite: any
 }
 
 export const MemoItem = (props: IMemoProps) => {
@@ -23,6 +24,14 @@ export const MemoItem = (props: IMemoProps) => {
     .use(remark2react)
     .processSync(props.memo.text).contents
 
+  const favoriteClassName = props.memo.favorite
+    ? "icon ion-md-star"
+    : "icon ion-md-star-outline"
+
+  const toggleFavorite = () => {
+    props.toggleFavorite(props.memo.id, !props.memo.favorite)
+  }
+
   return (
     <div className="card">
       <div className="card-content">
@@ -31,6 +40,9 @@ export const MemoItem = (props: IMemoProps) => {
           <span style={style}>{formatYMDHms(d)}</span>
           <span onClick={removeMemo}>
             <i className="icon ion-md-trash" />
+          </span>
+          <span onClick={toggleFavorite}>
+            <i className={favoriteClassName} />
           </span>
         </div>
       </div>

@@ -3,8 +3,8 @@ import { of } from "rxjs"
 import { ajax, AjaxError, AjaxResponse } from "rxjs/ajax"
 import { catchError, map, switchMap } from "rxjs/operators"
 
-import { addedMemo, receiveMemos } from "../actions"
-import { ADD_MEMO, FETCH_MEMOS, REMOVE_MEMO } from "../constants"
+import { addedMemo, receiveMemo, receiveMemos } from "../actions"
+import { ADD_MEMO, FETCH_MEMOS, REMOVE_MEMO, TOGGLE_FAVORITE } from "../constants"
 import { IMemo } from "../types"
 
 const API_URL = "http://localhost:8888/memos"
@@ -46,5 +46,18 @@ export const removeMemoEpic: Epic = action$ =>
       return ajax
         .delete(`${API_URL}/${action.payload.id}`)
         .pipe(map(res => ({ type: "none" })))
+    })
+  )
+
+export const toggleFavoriteEpic: Epic = action$ =>
+  action$.pipe(
+    ofType(TOGGLE_FAVORITE),
+    switchMap(action => {
+      const id = action.payload.id
+      delete action.payload.id
+
+      return ajax
+        .patch(`${API_URL}/${id}`, action.payload, headers)
+        .pipe(map(res => receiveMemo(res.response)))
     })
   )
