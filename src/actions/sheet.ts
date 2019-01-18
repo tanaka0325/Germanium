@@ -6,6 +6,7 @@ import {
   RECEIVE_SHEET,
   RECEIVE_SHEETS,
   SELECT_SHEET,
+  UNSELECT_SHEET,
 } from "../constants"
 import { ISheet } from "../types"
 
@@ -50,4 +51,8 @@ export const selectSheet = (id: string) => ({
   payload: {
     id,
   },
+})
+
+export const unselectSheet = () => ({
+  type: UNSELECT_SHEET as typeof UNSELECT_SHEET,
 })

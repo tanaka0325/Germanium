@@ -7,6 +7,7 @@ import {
   receiveSheet,
   receiveSheets,
   selectSheet,
+  unselectSheet,
 } from "../actions"
 import {
   ADD_SHEET,
@@ -15,6 +16,7 @@ import {
   RECEIVE_SHEET,
   RECEIVE_SHEETS,
   SELECT_SHEET,
+  UNSELECT_SHEET,
 } from "../constants"
 import { ISheet } from "../types"
 
@@ -25,6 +27,7 @@ type Action =
   | ReturnType<typeof receiveSheets>
   | ReturnType<typeof receiveSheet>
   | ReturnType<typeof selectSheet>
+  | ReturnType<typeof unselectSheet>
 
 interface ISheetState {
   selectedId: string
@@ -51,6 +54,8 @@ export const sheet: Reducer<ISheetState, Action> = (state = initialState, action
       return Object.assign({}, state, { list: [...action.payload.sheets] })
     case SELECT_SHEET:
       return Object.assign({}, state, { selectedId: action.payload.id })
+    case UNSELECT_SHEET:
+      return Object.assign({}, state, { selectedId: null })
     case FETCH_SHEET:
     case ADD_SHEET:
       return state

@@ -6,6 +6,7 @@ import {
   receiveMemo,
   receiveMemos,
   removeMemo,
+  searchMemo,
   toggleFavorite,
 } from "../actions"
 import {
@@ -14,6 +15,7 @@ import {
   RECEIVE_MEMO,
   RECEIVE_MEMOS,
   REMOVE_MEMO,
+  SEARCH_MEMO,
   TOGGLE_FAVORITE,
 } from "../constants"
 import { IMemo } from "../types"
@@ -25,6 +27,7 @@ type Action =
   | ReturnType<typeof receiveMemos>
   | ReturnType<typeof toggleFavorite>
   | ReturnType<typeof receiveMemo>
+  | ReturnType<typeof searchMemo>
 
 export const memos: Reducer<IMemo[], Action> = (state = [], action) => {
   switch (action.type) {
@@ -41,6 +44,8 @@ export const memos: Reducer<IMemo[], Action> = (state = [], action) => {
       )
     case RECEIVE_MEMOS:
       return [...action.payload.memos]
+    case SEARCH_MEMO:
+      return state
     default:
       const _: never = action
       return state

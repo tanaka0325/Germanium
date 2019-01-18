@@ -4,10 +4,10 @@ interface IProps {
   value: string
   handleOnChange?: any
   handleOnKeyDown?: any
-  disabled?: boolean
+  placeholder?: string
 }
 
-export const Textarea = (props: IProps) => {
+export const Input = (props: IProps) => {
   const handleOnChange = (e: React.FormEvent) => {
     if (props.handleOnChange) {
       props.handleOnChange(e)
@@ -20,15 +20,16 @@ export const Textarea = (props: IProps) => {
     }
   }
 
-  const disabled = props.disabled ? props.disabled : false
+  const placeholder = props.placeholder ? props.placeholder : ""
 
   return (
-    <textarea
-      className="textarea"
+    <input
+      type="text"
+      className="input"
+      placeholder={placeholder}
       value={props.value}
       onChange={handleOnChange}
       onKeyDown={handleOnKeyDown}
-      disabled={disabled}
     />
   )
 }

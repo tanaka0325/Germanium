@@ -7,11 +7,14 @@ import {
   fetchSheet,
   fetchSheets,
   removeMemo,
+  searchMemo,
   selectSheet,
   toggleFavorite,
 } from "../actions"
+
 import { MemoForm } from "../components/MemoForm"
 import { MemoList } from "../components/MemoList"
+import { SearchBox } from "../components/SearchBox"
 import { SheetList } from "../components/SheetList"
 
 export class Sheet extends React.Component<any, {}> {
@@ -26,6 +29,7 @@ export class Sheet extends React.Component<any, {}> {
   public render() {
     const latestSheet = this.props.sheets[this.props.sheets.length - 1]
     const formDisabled = !(latestSheet && latestSheet.id === this.props.selectedSheetId)
+
     return (
       <>
         <div className="sheet">
@@ -37,6 +41,7 @@ export class Sheet extends React.Component<any, {}> {
           />
         </div>
         <div className="memo">
+          <SearchBox searchMemo={this.props.searchMemo} />
           <MemoForm
             addMemo={this.props.addMemo}
             selectedSheetId={this.props.selectedSheetId}
@@ -67,6 +72,7 @@ const mapDispatchToProps = dispatch => ({
   fetchSheets: () => dispatch(fetchSheets()),
   selectSheet: id => dispatch(selectSheet(id)),
   toggleFavorite: (id, favorite) => dispatch(toggleFavorite(id, favorite)),
+  searchMemo: word => dispatch(searchMemo(word)),
 })
 
 export const SheetContainer = connect(

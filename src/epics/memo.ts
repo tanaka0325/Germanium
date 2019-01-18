@@ -1,10 +1,24 @@
 import { Epic, ofType } from "redux-observable"
 import { of } from "rxjs"
 import { ajax, AjaxError, AjaxResponse } from "rxjs/ajax"
-import { catchError, map, switchMap } from "rxjs/operators"
+import {
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  mergeMap,
+  switchMap,
+  tap,
+} from "rxjs/operators"
 
-import { addedMemo, receiveMemo, receiveMemos } from "../actions"
-import { ADD_MEMO, FETCH_MEMOS, REMOVE_MEMO, TOGGLE_FAVORITE } from "../constants"
+import { addedMemo, receiveMemo, receiveMemos, unselectSheet } from "../actions"
+import {
+  ADD_MEMO,
+  FETCH_MEMOS,
+  REMOVE_MEMO,
+  SEARCH_MEMO,
+  TOGGLE_FAVORITE,
+} from "../constants"
 import { IMemo } from "../types"
 
 const API_URL = "http://localhost:8888/memos"
@@ -59,5 +73,21 @@ export const toggleFavoriteEpic: Epic = action$ =>
       return ajax
         .patch(`${API_URL}/${id}`, action.payload, headers)
         .pipe(map(res => receiveMemo(res.response)))
+    })
+  )
+
+export const searchMemoEpic: Epic = action$ =>
+  action$.pipe(
+    ofType(SEARCH_MEMO),
+    map(action => action.payload.word),
+    debounceTime(400),
+    distinctUntilChanged(),
+    switchMap(word => {
+      const url = `${API_URL}/search?q=${word}`
+      return ajax.getJSON(url).pipe(
+        mergeMap((res: IMemo[]) => {
+          return [receiveMemos(res), unselectSheet()]
+        })
+      )
     })
   )
