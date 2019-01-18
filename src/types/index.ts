@@ -12,3 +12,8 @@ export interface ISheet {
   updated_at: Date
   memos?: IMemo[]
 }
+
+export interface IModal {
+  is_open: boolean
+  message?: string
+}

@@ -1,10 +1,12 @@
 import { Epic, ofType } from "redux-observable"
-import { ajax, AjaxResponse } from "rxjs/ajax"
-import { filter, map, mergeMap, switchMap } from "rxjs/operators"
+import { of } from "rxjs"
+import { ajax, AjaxError, AjaxResponse } from "rxjs/ajax"
+import { catchError, filter, map, mergeMap, switchMap } from "rxjs/operators"
 
 import {
   addedSheet,
   fetchSheet,
+  openModal,
   receiveMemos,
   receiveSheet,
   receiveSheets,
@@ -56,7 +58,8 @@ export const addSheetsEpic: Epic = action$ =>
           } else {
             return [addedSheet(res.response), receiveMemos([])]
           }
-        })
+        }),
+        catchError((err: AjaxError) => of(openModal(err.response.error.message)))
       )
     )
   )

@@ -7,15 +7,13 @@ import {
 } from "../constants"
 import { IMemo } from "../types"
 
-export const addMemo = (sheetId: string, text: string) => {
-  return {
-    type: ADD_MEMO as typeof ADD_MEMO,
-    payload: {
-      text,
-      sheet_id: sheetId,
-    },
-  }
-}
+export const addMemo = (sheetId: string, text: string) => ({
+  type: ADD_MEMO as typeof ADD_MEMO,
+  payload: {
+    text,
+    sheet_id: sheetId,
+  },
+})
 
 export const addedMemo = (memo: IMemo) => ({
   type: ADDED_MEMO as typeof ADDED_MEMO,
