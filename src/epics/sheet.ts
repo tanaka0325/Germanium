@@ -2,8 +2,22 @@ import { Epic, ofType } from "redux-observable"
 import { ajax } from "rxjs/ajax"
 import { filter, map, mergeMap, switchMap } from "rxjs/operators"
 
-import { fetchSheet, receiveMemos, receiveSheet, receiveSheets, selectSheet } from "../actions"
-import { ADD_SHEET, FETCH_SHEET, FETCH_SHEETS, RECEIVE_SHEETS, SELECT_SHEET } from "../constants"
+import {
+  addedSheet,
+  fetchSheet,
+  receiveMemos,
+  receiveSheet,
+  receiveSheets,
+  selectSheet,
+} from "../actions"
+import {
+  ADD_SHEET,
+  FETCH_SHEET,
+  FETCH_SHEETS,
+  RECEIVE_SHEETS,
+  SELECT_SHEET,
+} from "../constants"
+import { ISheet } from "../types"
 
 const API_URL = "http://localhost:8888/sheets"
 const headers = {
@@ -26,7 +40,9 @@ export const fetchSheetEpic: Epic = action$ =>
 export const fetchSheetsEpic: Epic = action$ =>
   action$.pipe(
     ofType(FETCH_SHEETS),
-    switchMap(() => ajax.getJSON(API_URL, headers).pipe(map(res => receiveSheets(res))))
+    switchMap(() =>
+      ajax.getJSON(API_URL, headers).pipe(map((res: ISheet[]) => receiveSheets(res)))
+    )
   )
 
 export const addSheetsEpic: Epic = action$ =>
@@ -38,7 +54,7 @@ export const addSheetsEpic: Epic = action$ =>
           if (res.response.msg === "today's record already exists!") {
             return [{ type: "none" }]
           } else {
-            return [receiveSheet(res.response), receiveMemos([])]
+            return [addedSheet(res.response), receiveMemos([])]
           }
         })
       )

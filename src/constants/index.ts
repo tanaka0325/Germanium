@@ -7,6 +7,7 @@ export const RECEIVE_MEMOS = "RECEIVE_MEMOS"
 
 // Sheet
 export const ADD_SHEET = "ADD_SHEET"
+export const ADDED_SHEET = "ADDED_SHEET"
 export const REMOVE_SHEET = "REMOVE_SHEET"
 export const FETCH_SHEET = "FETCH_SHEET"
 export const FETCH_SHEETS = "FETCH_SHEETS"

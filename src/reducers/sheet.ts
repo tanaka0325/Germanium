@@ -1,11 +1,26 @@
 import { Reducer } from "redux"
 
-import { addSheet, fetchSheet, receiveSheet, receiveSheets, selectSheet } from "../actions"
-import { ADD_SHEET, FETCH_SHEET, RECEIVE_SHEET, RECEIVE_SHEETS, SELECT_SHEET } from "../constants"
+import {
+  addedSheet,
+  addSheet,
+  fetchSheet,
+  receiveSheet,
+  receiveSheets,
+  selectSheet,
+} from "../actions"
+import {
+  ADD_SHEET,
+  ADDED_SHEET,
+  FETCH_SHEET,
+  RECEIVE_SHEET,
+  RECEIVE_SHEETS,
+  SELECT_SHEET,
+} from "../constants"
 import { ISheet } from "../types"
 
 type Action =
   | ReturnType<typeof addSheet>
+  | ReturnType<typeof addedSheet>
   | ReturnType<typeof fetchSheet>
   | ReturnType<typeof receiveSheets>
   | ReturnType<typeof receiveSheet>
@@ -23,10 +38,14 @@ const initialState = {
 
 export const sheet: Reducer<ISheetState, Action> = (state = initialState, action) => {
   switch (action.type) {
+    case ADDED_SHEET:
+      return Object.assign({}, state, {
+        selectedId: action.payload.sheet.id,
+        list: [...state.list, action.payload.sheet],
+      })
     case RECEIVE_SHEET:
       return Object.assign({}, state, {
         selectedId: action.payload.sheet.id,
-        list: [...state.list],
       })
     case RECEIVE_SHEETS:
       return Object.assign({}, state, { list: [...action.payload.sheets] })
