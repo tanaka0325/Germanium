@@ -10,4 +10,5 @@ export interface ISheet {
   id: string
   created_at: Date
   updated_at: Date
+  memos?: IMemo[]
 }

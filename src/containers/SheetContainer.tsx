@@ -1,12 +1,19 @@
 import * as React from "react"
 import { connect } from "react-redux"
 
-import { addMemo, addSheet, fetchSheet, fetchSheets, removeMemo, selectSheet } from "../actions"
+import {
+  addMemo,
+  addSheet,
+  fetchSheet,
+  fetchSheets,
+  removeMemo,
+  selectSheet,
+} from "../actions"
 import { MemoForm } from "../components/MemoForm"
 import { MemoList } from "../components/MemoList"
 import { SheetList } from "../components/SheetList"
 
-export class Sheet extends React.Component<any, any> {
+export class Sheet extends React.Component<any, {}> {
   constructor(props) {
     super(props)
   }

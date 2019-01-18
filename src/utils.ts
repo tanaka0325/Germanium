@@ -6,6 +6,8 @@ export const formatYMDHms = (d: Date) => {
   return dayjs(d).format("YYYY/MM/DD HH:mm:ss")
 }
 
+// format date
+// ex. 2018/01/01
 export const formatYMD = (d: Date) => {
   return dayjs(d).format("YYYY/MM/DD")
 }

@@ -1,6 +1,5 @@
 import * as React from "react"
 
-import { addSheet } from "../actions"
 import { Button } from "../components/common/Button"
 import { ISheet } from "../types"
 import { formatYMD } from "../utils"

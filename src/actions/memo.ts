@@ -1,4 +1,10 @@
-import { ADD_MEMO, ADDED_MEMO, FETCH_MEMOS, RECEIVE_MEMOS, REMOVE_MEMO } from "../constants"
+import {
+  ADD_MEMO,
+  ADDED_MEMO,
+  FETCH_MEMOS,
+  RECEIVE_MEMOS,
+  REMOVE_MEMO,
+} from "../constants"
 import { IMemo } from "../types"
 
 export const addMemo = (sheetId: string, text: string) => {
@@ -26,7 +32,7 @@ export const fetchMemos = (sheetId?: string) => {
   return sheetId ? Object.assign({}, action, { payload: { sheetId } }) : action
 }
 
-export const receiveMemos = (memos: any) => ({
+export const receiveMemos = (memos: IMemo[]) => ({
   type: RECEIVE_MEMOS as typeof RECEIVE_MEMOS,
   payload: {
     memos,
