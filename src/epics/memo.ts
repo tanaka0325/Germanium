@@ -14,6 +14,7 @@ import {
 import { addedMemo, receiveMemo, receiveMemos, unselectSheet } from "../actions"
 import {
   ADD_MEMO,
+  EDIT_MEMO,
   FETCH_MEMOS,
   REMOVE_MEMO,
   SEARCH_MEMO,
@@ -63,16 +64,16 @@ export const removeMemoEpic: Epic = action$ =>
     })
   )
 
-export const toggleFavoriteEpic: Epic = action$ =>
+export const editMemoEpic: Epic = action$ =>
   action$.pipe(
-    ofType(TOGGLE_FAVORITE),
+    ofType(EDIT_MEMO),
     switchMap(action => {
-      const id = action.payload.id
-      delete action.payload.id
-
       return ajax
-        .patch(`${API_URL}/${id}`, action.payload, headers)
-        .pipe(map(res => receiveMemo(res.response)))
+        .patch(`${API_URL}/${action.payload.memo.id}`, action.payload.memo, headers)
+        .pipe(
+          tap(res => console.log(res)),
+          map(res => receiveMemo(res.response))
+        )
     })
   )
 

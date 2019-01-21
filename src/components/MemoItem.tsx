@@ -5,49 +5,104 @@ import * as remark2react from "remark-react"
 
 import { IMemo } from "../types"
 import { formatYMDHms } from "../utils"
+import { Textarea } from "./common/Textarea"
 
 interface IMemoProps {
   memo: IMemo
   removeMemo: any
-  toggleFavorite: any
+  editMemo: any
 }
 
-export const MemoItem = (props: IMemoProps) => {
-  const d = new Date(props.memo.created_at)
+export class MemoItem extends React.Component<IMemoProps, any> {
+  constructor(props) {
+    super(props)
 
-  const removeMemo = () => {
-    props.removeMemo(props.memo.id)
+    this.state = {
+      text: this.props.memo.text,
+      isEditing: false,
+    }
   }
 
-  const text = remark()
-    .use(breaks)
-    .use(remark2react)
-    .processSync(props.memo.text).contents
-
-  const favoriteClassName = props.memo.favorite
-    ? "icon ion-md-star"
-    : "icon ion-md-star-outline"
-
-  const toggleFavorite = () => {
-    props.toggleFavorite(props.memo.id, !props.memo.favorite)
+  public removeMemo = () => {
+    this.props.removeMemo(this.props.memo.id)
   }
 
-  return (
-    <div className="card">
-      <div className="card-content">
-        <div className="content">
-          {text}
-          <span style={style}>{formatYMDHms(d)}</span>
-          <span onClick={removeMemo}>
-            <i className="icon ion-md-trash" />
-          </span>
-          <span onClick={toggleFavorite}>
-            <i className={favoriteClassName} />
-          </span>
+  public toggleFavorite = () => {
+    const memo = Object.assign({}, this.props.memo, {
+      favorite: !this.props.memo.favorite,
+    })
+    this.editMemo(memo)
+  }
+
+  public editMemo = (memo: IMemo) => {
+    this.props.editMemo(memo)
+  }
+
+  public handleOnChange = (e: any) => {
+    this.setState({
+      text: e.target.value,
+    })
+  }
+
+  public handleOnKeyDown = (e: any) => {
+    // Cmd+Enter => send
+    if (e.metaKey && e.key === "Enter") {
+      e.preventDefault()
+      const memo = Object.assign({}, this.props.memo, { text: this.state.text })
+      this.editMemo(memo)
+      this.setState({
+        isEditing: false,
+        text: "",
+      })
+    }
+  }
+
+  public toggleEditMode = () => {
+    this.setState({ isEditing: !this.state.isEditing })
+  }
+
+  public render() {
+    const d = new Date(this.props.memo.created_at)
+
+    const text = remark()
+      .use(breaks)
+      .use(remark2react)
+      .processSync(this.props.memo.text).contents
+
+    const favoriteClassName = this.props.memo.favorite
+      ? "icon ion-md-star"
+      : "icon ion-md-star-outline"
+
+    const textarea = (
+      <Textarea
+        value={this.state.text}
+        handleOnChange={this.handleOnChange}
+        handleOnKeyDown={this.handleOnKeyDown}
+      />
+    )
+
+    const html = this.state.isEditing ? textarea : text
+
+    return (
+      <div className="card">
+        <div className="card-content">
+          <div className="content">
+            {html}
+            <span style={style}>{formatYMDHms(d)}</span>
+            <span onClick={this.removeMemo}>
+              <i className="icon ion-md-trash" />
+            </span>
+            <span onClick={this.toggleFavorite}>
+              <i className={favoriteClassName} />
+            </span>
+            <span onClick={this.toggleEditMode}>
+              <i className="icon ion-md-create" />
+            </span>
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 const style = {

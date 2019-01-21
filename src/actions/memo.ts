@@ -1,12 +1,12 @@
 import {
   ADD_MEMO,
   ADDED_MEMO,
+  EDIT_MEMO,
   FETCH_MEMOS,
   RECEIVE_MEMO,
   RECEIVE_MEMOS,
   REMOVE_MEMO,
   SEARCH_MEMO,
-  TOGGLE_FAVORITE,
 } from "../constants"
 import { IMemo } from "../types"
 
@@ -45,11 +45,10 @@ export const receiveMemos = (memos: IMemo[]) => ({
   },
 })
 
-export const toggleFavorite = (id: string, favorite: boolean) => ({
-  type: TOGGLE_FAVORITE as typeof TOGGLE_FAVORITE,
+export const editMemo = (memo: IMemo) => ({
+  type: EDIT_MEMO as typeof EDIT_MEMO,
   payload: {
-    id,
-    favorite,
+    memo,
   },
 })
 

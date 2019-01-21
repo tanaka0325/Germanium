@@ -3,15 +3,16 @@ import { Reducer } from "redux"
 import {
   addedMemo,
   addMemo,
+  editMemo,
   receiveMemo,
   receiveMemos,
   removeMemo,
   searchMemo,
-  toggleFavorite,
 } from "../actions"
 import {
   ADD_MEMO,
   ADDED_MEMO,
+  EDIT_MEMO,
   RECEIVE_MEMO,
   RECEIVE_MEMOS,
   REMOVE_MEMO,
@@ -25,14 +26,14 @@ type Action =
   | ReturnType<typeof addedMemo>
   | ReturnType<typeof removeMemo>
   | ReturnType<typeof receiveMemos>
-  | ReturnType<typeof toggleFavorite>
+  | ReturnType<typeof editMemo>
   | ReturnType<typeof receiveMemo>
   | ReturnType<typeof searchMemo>
 
 export const memos: Reducer<IMemo[], Action> = (state = [], action) => {
   switch (action.type) {
     case ADD_MEMO:
-    case TOGGLE_FAVORITE:
+    case EDIT_MEMO:
       return state
     case ADDED_MEMO:
       return [...state, action.payload.memo]

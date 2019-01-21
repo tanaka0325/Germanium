@@ -6,6 +6,7 @@ export const FETCH_MEMOS = "FETCH_MEMOS"
 export const RECEIVE_MEMO = "RECEIVE_MEMO"
 export const RECEIVE_MEMOS = "RECEIVE_MEMOS"
 export const TOGGLE_FAVORITE = "TOGGLE_FAVORITE"
+export const EDIT_MEMO = "EDIT_MEMO"
 export const SEARCH_MEMO = "SEARCH_MEMO"
 
 // Sheet

@@ -4,12 +4,12 @@ import { connect } from "react-redux"
 import {
   addMemo,
   addSheet,
+  editMemo,
   fetchSheet,
   fetchSheets,
   removeMemo,
   searchMemo,
   selectSheet,
-  toggleFavorite,
 } from "../actions"
 
 import { MemoForm } from "../components/MemoForm"
@@ -50,7 +50,7 @@ export class Sheet extends React.Component<any, {}> {
           <MemoList
             memos={this.props.memos}
             removeMemo={this.props.removeMemo}
-            toggleFavorite={this.props.toggleFavorite}
+            editMemo={this.props.editMemo}
           />
         </div>
       </>
@@ -71,7 +71,7 @@ const mapDispatchToProps = dispatch => ({
   fetchSheet: id => dispatch(fetchSheet(id)),
   fetchSheets: () => dispatch(fetchSheets()),
   selectSheet: id => dispatch(selectSheet(id)),
-  toggleFavorite: (id, favorite) => dispatch(toggleFavorite(id, favorite)),
+  editMemo: memo => dispatch(editMemo(memo)),
   searchMemo: word => dispatch(searchMemo(word)),
 })
 

@@ -7,7 +7,7 @@ import { MemoItem } from "./MemoItem"
 interface IMemoListProps {
   memos: IMemo[]
   removeMemo: any
-  toggleFavorite: any
+  editMemo: any
 }
 
 export const MemoList = (props: IMemoListProps) => {
@@ -17,7 +17,7 @@ export const MemoList = (props: IMemoListProps) => {
       key={`memo-${m.id}`}
       memo={m}
       removeMemo={props.removeMemo}
-      toggleFavorite={props.toggleFavorite}
+      editMemo={props.editMemo}
     />
   ))
   return <div className="memolist">{memoList}</div>
