@@ -7,13 +7,18 @@ import { IMemo } from "../types"
 import { formatYMDHms } from "../utils"
 import { Textarea } from "./common/Textarea"
 
-interface IMemoProps {
+interface IMemoItemProps {
   memo: IMemo
   removeMemo: any
   editMemo: any
 }
 
-export class MemoItem extends React.Component<IMemoProps, any> {
+interface IMemoItemState {
+  text: string
+  isEditing: boolean
+}
+
+export class MemoItem extends React.Component<IMemoItemProps, IMemoItemState> {
   constructor(props) {
     super(props)
 
@@ -38,13 +43,14 @@ export class MemoItem extends React.Component<IMemoProps, any> {
     this.props.editMemo(memo)
   }
 
-  public handleOnChange = (e: any) => {
+  public handleOnChange = (e: React.FormEvent) => {
+    const el = e.target as HTMLInputElement
     this.setState({
-      text: e.target.value,
+      text: el.value,
     })
   }
 
-  public handleOnKeyDown = (e: any) => {
+  public handleOnKeyDown = (e: React.KeyboardEvent) => {
     // Cmd+Enter => send
     if (e.metaKey && e.key === "Enter") {
       e.preventDefault()
