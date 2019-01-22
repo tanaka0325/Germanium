@@ -2,25 +2,21 @@ import * as React from "react"
 
 export const Category = (props: any) => {
   const children = props.category.children.map((child: any) => {
-    if (child.type === "child") {
-      return (
-        <CategoryChild
-          key={child.name}
-          child={child}
-          selectedSheetId={props.selectedSheetId}
-          selectSheet={props.selectSheet}
-        />
-      )
-    } else {
-      return (
-        <Category
-          key={child.name}
-          category={child}
-          selectedSheetId={props.selectedSheetId}
-          selectSheet={props.selectSheet}
-        />
-      )
-    }
+    return child.type === "child" ? (
+      <CategoryChild
+        key={child.name}
+        child={child}
+        selectedSheetId={props.selectedSheetId}
+        selectSheet={props.selectSheet}
+      />
+    ) : (
+      <Category
+        key={child.name}
+        category={child}
+        selectedSheetId={props.selectedSheetId}
+        selectSheet={props.selectSheet}
+      />
+    )
   })
   return (
     <details>
