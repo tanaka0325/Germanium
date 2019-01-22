@@ -11,15 +11,14 @@ import {
   tap,
 } from "rxjs/operators"
 
-import { addedMemo, receiveMemo, receiveMemos, unselectSheet } from "../actions"
 import {
-  ADD_MEMO,
-  EDIT_MEMO,
-  FETCH_MEMOS,
-  REMOVE_MEMO,
-  SEARCH_MEMO,
-  TOGGLE_FAVORITE,
-} from "../constants"
+  addedMemo,
+  receiveMemo,
+  receiveMemos,
+  selectSheet,
+  unselectSheet,
+} from "../actions"
+import { ADD_MEMO, EDIT_MEMO, FETCH_MEMOS, REMOVE_MEMO, SEARCH_MEMO } from "../constants"
 import { IMemo } from "../types"
 
 const API_URL = "http://localhost:8888/memos"
@@ -77,7 +76,7 @@ export const editMemoEpic: Epic = action$ =>
     })
   )
 
-export const searchMemoEpic: Epic = action$ =>
+export const searchMemoEpic: Epic = (action$, state$) =>
   action$.pipe(
     ofType(SEARCH_MEMO),
     map(action => action.payload.word),
@@ -87,7 +86,10 @@ export const searchMemoEpic: Epic = action$ =>
       const url = `${API_URL}/search?q=${word}`
       return ajax.getJSON(url).pipe(
         mergeMap((res: IMemo[]) => {
-          return [receiveMemos(res), unselectSheet()]
+          const latestSheet = state$.value.sheet.list[state$.value.sheet.list.length - 1]
+          const selectSheetAction =
+            word.length === 0 ? () => selectSheet(latestSheet.id) : unselectSheet
+          return [selectSheetAction(), receiveMemos(res)]
         })
       )
     })
