@@ -10,3 +10,7 @@
 .app > .memo {
   margin: 20px;
 }
+
+.app > .sheet details details {
+  margin-left: 1rem;
+}

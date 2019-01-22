@@ -1,8 +1,10 @@
+import * as dayjs from "dayjs"
 import * as React from "react"
 
-import { Button } from "../components/common/Button"
 import { ISheet } from "../types"
 import { formatYMD } from "../utils"
+import { Category } from "./Category"
+import { Button } from "./common/Button"
 
 interface ISheetListProps {
   sheets: ISheet[]
@@ -12,18 +14,17 @@ interface ISheetListProps {
 }
 
 export const SheetList = (props: ISheetListProps) => {
-  const sheetItem = (sheet: ISheet) => {
-    const handleOnClick = () => props.selectSheet(sheet.id)
-    const d = formatYMD(new Date(sheet.created_at))
-    const className =
-      props.selectedSheetId === sheet.id ? "has-background-grey-lighter" : ""
-    return (
-      <p key={sheet.id} className={className} onClick={handleOnClick}>
-        {d}
-      </p>
-    )
-  }
-  const sheetItems = props.sheets.map(sheet => sheetItem(sheet))
+  const formatedSheets = convertSheets(props.sheets)
+
+  const sheetItems = formatedSheets.map(sheet => (
+    <Category
+      key={sheet.name}
+      category={sheet}
+      selectedSheetId={props.selectedSheetId}
+      selectSheet={props.selectSheet}
+    />
+  ))
+
   return (
     <div>
       <Button classNames={["is-fullwidth"]} handleOnClick={props.addSheet}>
@@ -32,6 +33,37 @@ export const SheetList = (props: ISheetListProps) => {
       {sheetItems}
     </div>
   )
+}
+
+function convertSheets(sheets: any) {
+  const splitedSheets = []
+
+  sheets.forEach((sheet: ISheet) => {
+    const splitDates = dayjs(sheet.created_at)
+      .format("YYYY/MM/DD")
+      .split("/")
+
+    let name = ""
+    createReturnDate(splitedSheets, splitDates)
+
+    function createReturnDate(results, dateStrings: string[]) {
+      const checkDate = dateStrings.shift()
+      name = name ? name + "/" + checkDate : checkDate
+      let el = results.find(e => e.name === name)
+      if (!el) {
+        if (dateStrings.length === 0) {
+          el = { type: "child", name, sheet }
+          results.push(el)
+          return results
+        }
+        el = { type: "category", name, children: [] }
+        results.push(el)
+      }
+
+      return createReturnDate(el.children, dateStrings)
+    }
+  })
+  return splitedSheets
 }
 
 const style = {
