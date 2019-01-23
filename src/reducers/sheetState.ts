@@ -18,11 +18,11 @@ type Action =
   | ReturnType<typeof unselectSheet>
 
 interface ISheetState {
-  selectedSheetId: string
+  selectedSheet: ISheet
 }
 
 const initialState = {
-  selectedSheetId: "",
+  selectedSheet: null,
 }
 
 export const sheetState: Reducer<ISheetState, Action> = (
@@ -32,18 +32,18 @@ export const sheetState: Reducer<ISheetState, Action> = (
   switch (action.type) {
     case ActionTypes.ADDED_SHEET:
       return Object.assign({}, state, {
-        selectedSheetId: action.payload.sheet.id,
+        selectedSheet: action.payload.sheet,
       })
     case ActionTypes.RECEIVE_SHEET:
       return Object.assign({}, state, {
-        selectedSheetId: action.payload.sheet.id,
+        selectedSheet: action.payload.sheet,
       })
     case ActionTypes.RECEIVE_SHEETS:
       return state
     case ActionTypes.SELECT_SHEET:
-      return Object.assign({}, state, { selectedSheetId: action.payload.id })
+      return Object.assign({}, state, { selectedSheet: action.payload.sheet })
     case ActionTypes.UNSELECT_SHEET:
-      return Object.assign({}, state, { selectedSheetId: null })
+      return Object.assign({}, state, { selectedSheet: null })
     default:
       const _: never = action
       return state

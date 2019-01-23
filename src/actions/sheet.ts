@@ -37,10 +37,10 @@ export const receiveSheet = (sheet: ISheet) => ({
   },
 })
 
-export const selectSheet = (id: string) => ({
+export const selectSheet = (sheet: ISheet) => ({
   type: ActionTypes.SELECT_SHEET as typeof ActionTypes.SELECT_SHEET,
   payload: {
-    id,
+    sheet,
   },
 })
 

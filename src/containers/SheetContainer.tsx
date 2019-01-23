@@ -5,7 +5,6 @@ import {
   addMemo,
   addSheet,
   editMemo,
-  fetchSheet,
   fetchSheets,
   removeMemo,
   searchMemo,
@@ -28,7 +27,8 @@ export class Sheet extends React.Component<any, {}> {
 
   public render() {
     const latestSheet = this.props.sheets[this.props.sheets.length - 1]
-    const formDisabled = !(latestSheet && latestSheet.id === this.props.selectedSheetId)
+    const selectedSheetId = this.props.selectedSheet ? this.props.selectedSheet.id : null
+    const formDisabled = !(latestSheet && latestSheet.id === selectedSheetId)
 
     return (
       <>
@@ -37,14 +37,14 @@ export class Sheet extends React.Component<any, {}> {
             sheets={this.props.sheets}
             addSheet={this.props.addSheet}
             selectSheet={this.props.selectSheet}
-            selectedSheetId={this.props.selectedSheetId}
+            selectedSheet={this.props.selectedSheet}
           />
         </div>
         <div className="memo">
           <SearchBox searchMemo={this.props.searchMemo} />
           <MemoForm
             addMemo={this.props.addMemo}
-            selectedSheetId={this.props.selectedSheetId}
+            selectedSheet={this.props.selectedSheet}
             disabled={formDisabled}
           />
           <MemoList
@@ -59,7 +59,7 @@ export class Sheet extends React.Component<any, {}> {
 }
 
 const mapStateToProps = state => ({
-  selectedSheetId: state.sheetState.selectedSheetId,
+  selectedSheet: state.sheetState.selectedSheet,
   sheets: state.sheets,
   memos: state.memos,
 })
@@ -68,9 +68,8 @@ const mapDispatchToProps = dispatch => ({
   addMemo: (sheetId, text) => dispatch(addMemo(sheetId, text)),
   removeMemo: memoId => dispatch(removeMemo(memoId)),
   addSheet: () => dispatch(addSheet()),
-  fetchSheet: id => dispatch(fetchSheet(id)),
   fetchSheets: () => dispatch(fetchSheets()),
-  selectSheet: id => dispatch(selectSheet(id)),
+  selectSheet: sheet => dispatch(selectSheet(sheet)),
   editMemo: memo => dispatch(editMemo(memo)),
   searchMemo: word => dispatch(searchMemo(word)),
 })

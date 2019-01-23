@@ -88,7 +88,7 @@ export const searchMemoEpic: Epic = (action$, state$) =>
         mergeMap((res: IMemo[]) => {
           const latestSheet = state$.value.sheets[state$.value.sheets.length - 1]
           const selectSheetAction =
-            word.length === 0 ? () => selectSheet(latestSheet.id) : unselectSheet
+            word.length === 0 ? () => selectSheet(latestSheet) : unselectSheet
           return [selectSheetAction(), receiveMemos(res)]
         })
       )

@@ -1,11 +1,12 @@
 import * as React from "react"
 
+import { ISheet } from "../types"
 import { Button } from "./common/Button"
 import { Textarea } from "./common/Textarea"
 
 interface IFormProps {
   addMemo: any
-  selectedSheetId: string
+  selectedSheet: ISheet
   disabled: boolean
 }
 interface IFormState {
@@ -39,7 +40,7 @@ export class MemoForm extends React.Component<IFormProps, IFormState> {
 
   public addMemo = () => {
     if (this.state.value) {
-      this.props.addMemo(this.props.selectedSheetId, this.state.value)
+      this.props.addMemo(this.props.selectedSheet.id, this.state.value)
       this.setState({ value: "" })
     }
   }

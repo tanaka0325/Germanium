@@ -25,11 +25,9 @@ export const fetchSheetEpic: Epic = action$ =>
   action$.pipe(
     ofType(ActionTypes.FETCH_SHEET),
     switchMap(action =>
-      ajax.getJSON(`${API_URL}/${action.payload.id}`, headers).pipe(
-        mergeMap((res: ISheet) => {
-          return [receiveSheet(res), receiveMemos(res.memos)]
-        })
-      )
+      ajax
+        .getJSON(`${API_URL}/${action.payload.id}`, headers)
+        .pipe(mergeMap((res: ISheet) => [receiveSheet(res), receiveMemos(res.memos)]))
     )
   )
 
@@ -55,15 +53,15 @@ export const addSheetsEpic: Epic = action$ =>
 export const selectSheetEpic: Epic = action$ =>
   action$.pipe(
     ofType(ActionTypes.SELECT_SHEET),
-    map(action => fetchSheet(action.payload.id))
+    map(action => fetchSheet(action.payload.sheet.id))
   )
 
 export const receiveSheetsEpic: Epic = (action$, state$) =>
   action$.pipe(
     ofType(ActionTypes.RECEIVE_SHEETS),
-    filter(() => state$.value.sheetState.selectedSheetId === ""),
+    filter(() => state$.value.sheetState.selectedSheet === null),
     map(() => {
-      const latestSheetId = state$.value.sheets[state$.value.sheets.length - 1].id
-      return selectSheet(latestSheetId)
+      const latestSheet = state$.value.sheets[state$.value.sheets.length - 1]
+      return selectSheet(latestSheet)
     })
   )

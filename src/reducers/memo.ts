@@ -25,6 +25,7 @@ export const memos: Reducer<IMemo[], Action> = (state = [], action) => {
   switch (action.type) {
     case ActionTypes.ADD_MEMO:
     case ActionTypes.EDIT_MEMO:
+    case ActionTypes.SEARCH_MEMO:
       return state
     case ActionTypes.ADDED_MEMO:
       return [...state, action.payload.memo]
@@ -36,8 +37,6 @@ export const memos: Reducer<IMemo[], Action> = (state = [], action) => {
       )
     case ActionTypes.RECEIVE_MEMOS:
       return [...action.payload.memos]
-    case ActionTypes.SEARCH_MEMO:
-      return state
     default:
       const _: never = action
       return state

@@ -8,8 +8,8 @@ import { Button } from "./common/Button"
 interface ISheetListProps {
   sheets: ISheet[]
   addSheet: () => any
-  selectSheet: (id: string) => any
-  selectedSheetId: string
+  selectSheet: (sheet: ISheet) => any
+  selectedSheet: ISheet
 }
 
 export const SheetList = (props: ISheetListProps) => {
@@ -19,7 +19,7 @@ export const SheetList = (props: ISheetListProps) => {
     <Category
       key={sheet.name}
       category={sheet}
-      selectedSheetId={props.selectedSheetId}
+      selectedSheet={props.selectedSheet}
       selectSheet={props.selectSheet}
     />
   ))

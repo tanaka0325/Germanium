@@ -6,14 +6,14 @@ export const Category = (props: any) => {
       <CategoryChild
         key={child.name}
         child={child}
-        selectedSheetId={props.selectedSheetId}
+        selectedSheet={props.selectedSheet}
         selectSheet={props.selectSheet}
       />
     ) : (
       <Category
         key={child.name}
         category={child}
-        selectedSheetId={props.selectedSheetId}
+        selectedSheet={props.selectedSheet}
         selectSheet={props.selectSheet}
       />
     )
@@ -28,10 +28,12 @@ export const Category = (props: any) => {
 
 export const CategoryChild = (props: any) => {
   const className =
-    props.selectedSheetId === props.child.sheet.id ? "has-background-grey-lighter" : ""
+    props.selectedSheet && props.selectedSheet.id === props.child.sheet.id
+      ? "has-background-grey-lighter"
+      : ""
 
   const handleOnClick = () => {
-    props.selectSheet(props.child.sheet.id)
+    props.selectSheet(props.child.sheet)
   }
 
   return (
