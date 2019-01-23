@@ -1,7 +1,7 @@
 import { Epic, ofType } from "redux-observable"
 import { of } from "rxjs"
 import { ajax, AjaxError, AjaxResponse } from "rxjs/ajax"
-import { catchError, filter, map, mergeMap, switchMap } from "rxjs/operators"
+import { catchError, filter, map, mergeMap, switchMap, tap } from "rxjs/operators"
 
 import {
   addedSheet,
@@ -67,9 +67,8 @@ export const selectSheetEpic: Epic = action$ =>
 export const receiveSheetsEpic: Epic = (action$, state$) =>
   action$.pipe(
     ofType(ActionTypes.RECEIVE_SHEETS),
-    filter(() => state$.value.sheet.selectedId === ""),
+    filter(() => state$.value.sheetState.selectedSheetId === ""),
     map(() => {
-      const latestSheet = state$.value.sheet.list[state$.value.sheet.list.length - 1]
-      return selectSheet(latestSheet.id)
+      return selectSheet(state$.value.sheetState.latestSheet.id)
     })
   )

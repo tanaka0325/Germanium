@@ -1,56 +1,17 @@
 import { Reducer } from "redux"
 
-import {
-  addedSheet,
-  addSheet,
-  fetchSheet,
-  receiveSheet,
-  receiveSheets,
-  selectSheet,
-  unselectSheet,
-} from "../actions"
+import { addedSheet, receiveSheets } from "../actions"
 import { ActionTypes } from "../constants"
 import { ISheet } from "../types"
 
-type Action =
-  | ReturnType<typeof addSheet>
-  | ReturnType<typeof addedSheet>
-  | ReturnType<typeof fetchSheet>
-  | ReturnType<typeof receiveSheets>
-  | ReturnType<typeof receiveSheet>
-  | ReturnType<typeof selectSheet>
-  | ReturnType<typeof unselectSheet>
+type Action = ReturnType<typeof addedSheet> | ReturnType<typeof receiveSheets>
 
-interface ISheetState {
-  selectedId: string
-  list: ISheet[]
-}
-
-const initialState = {
-  selectedId: "",
-  list: [],
-}
-
-export const sheet: Reducer<ISheetState, Action> = (state = initialState, action) => {
+export const sheets: Reducer<ISheet[], Action> = (state = [], action) => {
   switch (action.type) {
     case ActionTypes.ADDED_SHEET:
-      return Object.assign({}, state, {
-        selectedId: action.payload.sheet.id,
-        list: [...state.list, action.payload.sheet],
-      })
-    case ActionTypes.RECEIVE_SHEET:
-      return Object.assign({}, state, {
-        selectedId: action.payload.sheet.id,
-      })
+      return [...state, action.payload.sheet]
     case ActionTypes.RECEIVE_SHEETS:
-      return Object.assign({}, state, { list: [...action.payload.sheets] })
-    case ActionTypes.SELECT_SHEET:
-      return Object.assign({}, state, { selectedId: action.payload.id })
-    case ActionTypes.UNSELECT_SHEET:
-      return Object.assign({}, state, { selectedId: null })
-    case ActionTypes.FETCH_SHEET:
-    case ActionTypes.ADD_SHEET:
-      return state
+      return [...action.payload.sheets]
     default:
       const _: never = action
       return state

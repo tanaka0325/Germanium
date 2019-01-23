@@ -27,8 +27,9 @@ export class Sheet extends React.Component<any, {}> {
   }
 
   public render() {
-    const latestSheet = this.props.sheets[this.props.sheets.length - 1]
-    const formDisabled = !(latestSheet && latestSheet.id === this.props.selectedSheetId)
+    const formDisabled = !(
+      this.props.latestSheet && this.props.latestSheet.id === this.props.selectedSheetId
+    )
 
     return (
       <>
@@ -59,8 +60,9 @@ export class Sheet extends React.Component<any, {}> {
 }
 
 const mapStateToProps = state => ({
-  selectedSheetId: state.sheet.selectedId,
-  sheets: state.sheet.list,
+  latestSheet: state.sheetState.latestSheet,
+  selectedSheetId: state.sheetState.selectedSheetId,
+  sheets: state.sheets,
   memos: state.memos,
 })
 

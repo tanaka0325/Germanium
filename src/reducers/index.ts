@@ -2,6 +2,7 @@ import { combineReducers } from "redux"
 
 import { memos } from "./memo"
 import { modal } from "./modal"
-import { sheet } from "./sheet"
+import { sheets } from "./sheet"
+import { sheetState } from "./sheetState"
 
-export const rootReducer = combineReducers({ memos, sheet, modal })
+export const rootReducer = combineReducers({ memos, sheets, modal, sheetState })
