@@ -58,7 +58,6 @@ export class MemoItem extends React.Component<IMemoItemProps, IMemoItemState> {
       this.editMemo(memo)
       this.setState({
         isEditing: false,
-        text: "",
       })
     }
   }
