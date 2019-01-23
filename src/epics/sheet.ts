@@ -46,13 +46,7 @@ export const addSheetsEpic: Epic = action$ =>
     ofType(ActionTypes.ADD_SHEET),
     switchMap(() =>
       ajax.post(API_URL, "", headers).pipe(
-        mergeMap((res: AjaxResponse) => {
-          if (res.response.msg === "today's record already exists!") {
-            return [{ type: "none" }]
-          } else {
-            return [addedSheet(res.response), receiveMemos([])]
-          }
-        }),
+        mergeMap((res: AjaxResponse) => [addedSheet(res.response), receiveMemos([])]),
         catchError((err: AjaxError) => of(openModal(err.response.error.message)))
       )
     )
