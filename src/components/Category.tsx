@@ -1,6 +1,12 @@
+import * as dayjs from "dayjs"
 import * as React from "react"
 
 export const Category = (props: any) => {
+  const date = props.selectedSheet ? dayjs(props.selectedSheet.createdAt) : null
+  const year = date ? date.format("YYYY") : null
+  const month = date ? date.format("YYYY/MM") : null
+  const openFlag = [year, month].includes(props.category.name)
+
   const children = props.category.children.map((child: any) => {
     return child.type === "child" ? (
       <CategoryChild
@@ -19,7 +25,7 @@ export const Category = (props: any) => {
     )
   })
   return (
-    <details>
+    <details open={openFlag}>
       <summary>{props.category.name}</summary>
       {children}
     </details>
