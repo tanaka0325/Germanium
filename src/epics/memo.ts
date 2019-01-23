@@ -18,7 +18,7 @@ import {
   selectSheet,
   unselectSheet,
 } from "../actions"
-import { ADD_MEMO, EDIT_MEMO, FETCH_MEMOS, REMOVE_MEMO, SEARCH_MEMO } from "../constants"
+import { ActionTypes } from "../constants"
 import { IMemo } from "../types"
 
 const API_URL = "http://localhost:8888/memos"
@@ -29,13 +29,13 @@ const headers = {
 
 export const fetchMemosEpic: Epic = action$ =>
   action$.pipe(
-    ofType(FETCH_MEMOS),
+    ofType(ActionTypes.FETCH_MEMOS),
     switchMap(() => ajax.getJSON(API_URL).pipe(map((res: IMemo[]) => receiveMemos(res))))
   )
 
 export const addMemosEpic: Epic = action$ =>
   action$.pipe(
-    ofType(ADD_MEMO),
+    ofType(ActionTypes.ADD_MEMO),
     switchMap(action => {
       const body = JSON.stringify(action.payload)
 
@@ -55,7 +55,7 @@ export const addMemosEpic: Epic = action$ =>
 
 export const removeMemoEpic: Epic = action$ =>
   action$.pipe(
-    ofType(REMOVE_MEMO),
+    ofType(ActionTypes.REMOVE_MEMO),
     switchMap(action => {
       return ajax
         .delete(`${API_URL}/${action.payload.id}`)
@@ -65,7 +65,7 @@ export const removeMemoEpic: Epic = action$ =>
 
 export const editMemoEpic: Epic = action$ =>
   action$.pipe(
-    ofType(EDIT_MEMO),
+    ofType(ActionTypes.EDIT_MEMO),
     switchMap(action => {
       return ajax
         .patch(`${API_URL}/${action.payload.memo.id}`, action.payload.memo, headers)
@@ -78,7 +78,7 @@ export const editMemoEpic: Epic = action$ =>
 
 export const searchMemoEpic: Epic = (action$, state$) =>
   action$.pipe(
-    ofType(SEARCH_MEMO),
+    ofType(ActionTypes.SEARCH_MEMO),
     map(action => action.payload.word),
     debounceTime(400),
     distinctUntilChanged(),

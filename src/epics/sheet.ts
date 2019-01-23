@@ -12,13 +12,7 @@ import {
   receiveSheets,
   selectSheet,
 } from "../actions"
-import {
-  ADD_SHEET,
-  FETCH_SHEET,
-  FETCH_SHEETS,
-  RECEIVE_SHEETS,
-  SELECT_SHEET,
-} from "../constants"
+import { ActionTypes } from "../constants"
 import { ISheet } from "../types"
 
 const API_URL = "http://localhost:8888/sheets"
@@ -29,7 +23,7 @@ const headers = {
 
 export const fetchSheetEpic: Epic = action$ =>
   action$.pipe(
-    ofType(FETCH_SHEET),
+    ofType(ActionTypes.FETCH_SHEET),
     switchMap(action =>
       ajax.getJSON(`${API_URL}/${action.payload.id}`, headers).pipe(
         mergeMap((res: ISheet) => {
@@ -41,7 +35,7 @@ export const fetchSheetEpic: Epic = action$ =>
 
 export const fetchSheetsEpic: Epic = action$ =>
   action$.pipe(
-    ofType(FETCH_SHEETS),
+    ofType(ActionTypes.FETCH_SHEETS),
     switchMap(() =>
       ajax.getJSON(API_URL, headers).pipe(map((res: ISheet[]) => receiveSheets(res)))
     )
@@ -49,7 +43,7 @@ export const fetchSheetsEpic: Epic = action$ =>
 
 export const addSheetsEpic: Epic = action$ =>
   action$.pipe(
-    ofType(ADD_SHEET),
+    ofType(ActionTypes.ADD_SHEET),
     switchMap(() =>
       ajax.post(API_URL, "", headers).pipe(
         mergeMap((res: AjaxResponse) => {
@@ -66,13 +60,13 @@ export const addSheetsEpic: Epic = action$ =>
 
 export const selectSheetEpic: Epic = action$ =>
   action$.pipe(
-    ofType(SELECT_SHEET),
+    ofType(ActionTypes.SELECT_SHEET),
     map(action => fetchSheet(action.payload.id))
   )
 
 export const receiveSheetsEpic: Epic = (action$, state$) =>
   action$.pipe(
-    ofType(RECEIVE_SHEETS),
+    ofType(ActionTypes.RECEIVE_SHEETS),
     filter(() => state$.value.sheet.selectedId === ""),
     map(() => {
       const latestSheet = state$.value.sheet.list[state$.value.sheet.list.length - 1]

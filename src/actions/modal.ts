@@ -1,12 +1,12 @@
-import { CLOSE_MODAL, OPEN_MODAL } from "../constants"
+import { ActionTypes } from "../constants"
 
 export const openModal = (message: string) => ({
-  type: OPEN_MODAL as typeof OPEN_MODAL,
+  type: ActionTypes.OPEN_MODAL as typeof ActionTypes.OPEN_MODAL,
   payload: {
     message,
   },
 })
 
 export const closeModal = () => ({
-  type: CLOSE_MODAL as typeof CLOSE_MODAL,
+  type: ActionTypes.CLOSE_MODAL as typeof ActionTypes.CLOSE_MODAL,
 })

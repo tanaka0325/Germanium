@@ -1,58 +1,49 @@
-import {
-  ADD_SHEET,
-  ADDED_SHEET,
-  FETCH_SHEET,
-  FETCH_SHEETS,
-  RECEIVE_SHEET,
-  RECEIVE_SHEETS,
-  SELECT_SHEET,
-  UNSELECT_SHEET,
-} from "../constants"
+import { ActionTypes } from "../constants"
 import { ISheet } from "../types"
 
 export const addSheet = () => ({
-  type: ADD_SHEET as typeof ADD_SHEET,
+  type: ActionTypes.ADD_SHEET as typeof ActionTypes.ADD_SHEET,
 })
 
 export const addedSheet = (sheet: ISheet) => ({
-  type: ADDED_SHEET as typeof ADDED_SHEET,
+  type: ActionTypes.ADDED_SHEET as typeof ActionTypes.ADDED_SHEET,
   payload: {
     sheet,
   },
 })
 
 export const fetchSheet = (id: string) => ({
-  type: FETCH_SHEET as typeof FETCH_SHEET,
+  type: ActionTypes.FETCH_SHEET as typeof ActionTypes.FETCH_SHEET,
   payload: {
     id,
   },
 })
 
 export const fetchSheets = () => ({
-  type: FETCH_SHEETS as typeof FETCH_SHEETS,
+  type: ActionTypes.FETCH_SHEETS as typeof ActionTypes.FETCH_SHEETS,
 })
 
 export const receiveSheets = (sheets: ISheet[]) => ({
-  type: RECEIVE_SHEETS as typeof RECEIVE_SHEETS,
+  type: ActionTypes.RECEIVE_SHEETS as typeof ActionTypes.RECEIVE_SHEETS,
   payload: {
     sheets,
   },
 })
 
 export const receiveSheet = (sheet: ISheet) => ({
-  type: RECEIVE_SHEET as typeof RECEIVE_SHEET,
+  type: ActionTypes.RECEIVE_SHEET as typeof ActionTypes.RECEIVE_SHEET,
   payload: {
     sheet,
   },
 })
 
 export const selectSheet = (id: string) => ({
-  type: SELECT_SHEET as typeof SELECT_SHEET,
+  type: ActionTypes.SELECT_SHEET as typeof ActionTypes.SELECT_SHEET,
   payload: {
     id,
   },
 })
 
 export const unselectSheet = () => ({
-  type: UNSELECT_SHEET as typeof UNSELECT_SHEET,
+  type: ActionTypes.UNSELECT_SHEET as typeof ActionTypes.UNSELECT_SHEET,
 })

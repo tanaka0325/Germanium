@@ -9,16 +9,7 @@ import {
   removeMemo,
   searchMemo,
 } from "../actions"
-import {
-  ADD_MEMO,
-  ADDED_MEMO,
-  EDIT_MEMO,
-  RECEIVE_MEMO,
-  RECEIVE_MEMOS,
-  REMOVE_MEMO,
-  SEARCH_MEMO,
-  TOGGLE_FAVORITE,
-} from "../constants"
+import { ActionTypes } from "../constants"
 import { IMemo } from "../types"
 
 type Action =
@@ -32,20 +23,20 @@ type Action =
 
 export const memos: Reducer<IMemo[], Action> = (state = [], action) => {
   switch (action.type) {
-    case ADD_MEMO:
-    case EDIT_MEMO:
+    case ActionTypes.ADD_MEMO:
+    case ActionTypes.EDIT_MEMO:
       return state
-    case ADDED_MEMO:
+    case ActionTypes.ADDED_MEMO:
       return [...state, action.payload.memo]
-    case REMOVE_MEMO:
+    case ActionTypes.REMOVE_MEMO:
       return state.filter((memo: IMemo) => memo.id !== action.payload.id)
-    case RECEIVE_MEMO:
+    case ActionTypes.RECEIVE_MEMO:
       return state.map((memo: IMemo) =>
         memo.id === action.payload.memo.id ? action.payload.memo : memo
       )
-    case RECEIVE_MEMOS:
+    case ActionTypes.RECEIVE_MEMOS:
       return [...action.payload.memos]
-    case SEARCH_MEMO:
+    case ActionTypes.SEARCH_MEMO:
       return state
     default:
       const _: never = action
