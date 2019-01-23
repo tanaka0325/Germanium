@@ -86,7 +86,7 @@ export const searchMemoEpic: Epic = (action$, state$) =>
       const url = `${API_URL}/search?q=${word}`
       return ajax.getJSON(url).pipe(
         mergeMap((res: IMemo[]) => {
-          const latestSheet = state$.value.sheet.list[state$.value.sheet.list.length - 1]
+          const latestSheet = state$.value.sheets[state$.value.sheets.length - 1]
           const selectSheetAction =
             word.length === 0 ? () => selectSheet(latestSheet.id) : unselectSheet
           return [selectSheetAction(), receiveMemos(res)]

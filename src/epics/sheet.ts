@@ -63,6 +63,7 @@ export const receiveSheetsEpic: Epic = (action$, state$) =>
     ofType(ActionTypes.RECEIVE_SHEETS),
     filter(() => state$.value.sheetState.selectedSheetId === ""),
     map(() => {
-      return selectSheet(state$.value.sheetState.latestSheet.id)
+      const latestSheetId = state$.value.sheets[state$.value.sheets.length - 1].id
+      return selectSheet(latestSheetId)
     })
   )
