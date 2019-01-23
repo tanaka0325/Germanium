@@ -56,24 +56,22 @@ export const addMemosEpic: Epic = action$ =>
 export const removeMemoEpic: Epic = action$ =>
   action$.pipe(
     ofType(ActionTypes.REMOVE_MEMO),
-    switchMap(action => {
-      return ajax
-        .delete(`${API_URL}/${action.payload.id}`)
-        .pipe(map(res => ({ type: "none" })))
-    })
+    switchMap(action =>
+      ajax.delete(`${API_URL}/${action.payload.id}`).pipe(map(res => ({ type: "none" })))
+    )
   )
 
 export const editMemoEpic: Epic = action$ =>
   action$.pipe(
     ofType(ActionTypes.EDIT_MEMO),
-    switchMap(action => {
-      return ajax
+    switchMap(action =>
+      ajax
         .patch(`${API_URL}/${action.payload.memo.id}`, action.payload.memo, headers)
         .pipe(
           tap(res => console.log(res)),
           map(res => receiveMemo(res.response))
         )
-    })
+    )
   )
 
 export const searchMemoEpic: Epic = (action$, state$) =>
